@@ -58,16 +58,19 @@ def do_build():
 def do_publish():
     try:
         # Pull latest from remote first
-        subprocess.run(['git', 'pull', 'origin', 'main'], check=True, capture_output=True)
+        subprocess.run(['git', 'pull', '--no-edit', 'origin', 'main'], check=True, capture_output=True, text=True)
         # Stage all changes
-        subprocess.run(['git', 'add', '-A'], check=True, capture_output=True)
+        subprocess.run(['git', 'add', '-A'], check=True, capture_output=True, text=True)
         # Commit
-        subprocess.run(['git', 'commit', '-m', '内容更新 - 后台发布'], check=True, capture_output=True)
+        subprocess.run(['git', 'commit', '-m', '内容更新 - 后台发布'], check=True, capture_output=True, text=True)
         # Push
         result = subprocess.run(['git', 'push'], check=True, capture_output=True, text=True)
         return jsonify({'status': 'ok', 'message': 'Published to GitHub', 'output': result.stdout[-200:]})
     except subprocess.CalledProcessError as e:
-        return jsonify({'status': 'error', 'message': e.stderr[-300:] if e.stderr else str(e)}), 500
+        msg = e.stderr[-300:] if e.stderr else str(e)
+        if isinstance(msg, bytes):
+            msg = msg.decode('utf-8', errors='replace')
+        return jsonify({'status': 'error', 'message': msg}), 500
 
 
 @app.route('/api/git-status', methods=['GET'])

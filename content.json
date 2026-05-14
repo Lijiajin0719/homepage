@@ -155,29 +155,29 @@
   },
   "publications": [
     {
+      "title": "Fast High-Fidelity Fourier Ptychographic Microscopy via Wavelet Transform and Linear Attention",
       "authors": "W. Sun†, J. Li†, et al.",
+      "journal": "Laser & Photonics Reviews, 2025, e01895",
+      "category": "published",
+      "review": true,
+      "link": "https://onlinelibrary.wiley.com/doi/10.1002/lpor.202501895",
       "badges": [
         {
           "class": "badge-blue",
-          "en": "",
-          "zh": "中科院一区Top"
+          "zh": "中科院一区Top",
+          "en": ""
         },
         {
           "class": "badge-green",
-          "en": "",
-          "zh": "JCR Q1"
+          "zh": "JCR Q1",
+          "en": ""
         },
         {
           "class": "badge-blue",
-          "en": "",
-          "zh": "IF=10"
+          "zh": "IF=10",
+          "en": ""
         }
-      ],
-      "category": "published",
-      "journal": "Laser & Photonics Reviews, 2025, e01895",
-      "link": "https://onlinelibrary.wiley.com/doi/10.1002/lpor.202501895",
-      "review": true,
-      "title": "Fast High-Fidelity Fourier Ptychographic Microscopy via Wavelet Transform and Linear Attention"
+      ]
     },
     {
       "authors": "J. Li, W. Sun, et al.",
@@ -294,15 +294,6 @@
       "link": null,
       "review": true,
       "title": "HOPE-Net: Mamba-Guided Hybrid Omni-Perceptual Enhanced Network for Sperm Detection"
-    },
-    {
-      "title": "11",
-      "authors": "11",
-      "journal": "11",
-      "category": "review",
-      "review": false,
-      "link": null,
-      "badges": []
     }
   ],
   "research": [
