@@ -948,7 +948,7 @@ function collectPublicationData() {
     authors: document.getElementById('f_pub_authors').value,
     journal: document.getElementById('f_pub_journal').value,
     category: document.getElementById('f_pub_category').value,
-    review: document.getElementById('f_pub_review').checked,
+    review: document.getElementById('f_pub_category').value === 'review' && document.getElementById('f_pub_review').checked,
     link: document.getElementById('f_pub_link').value || null,
     badges: collectBadges('pub')
   };
