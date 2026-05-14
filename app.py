@@ -36,6 +36,10 @@ def update_content():
     data = request.get_json()
     if not data:
         return jsonify({'status': 'error', 'message': 'No data'}), 400
+    # Validate required keys
+    required = ['home', 'publications', 'research', 'achievements']
+    if not all(k in data for k in required):
+        return jsonify({'status': 'error', 'message': 'Invalid content structure'}), 400
     save_content(data)
     return jsonify({'status': 'ok'})
 
@@ -76,6 +80,14 @@ def git_status():
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
 
+@app.errorhandler(400)
+def bad_request(_e):
+    return jsonify({'status': 'error', 'message': 'Bad request'}), 400
+
+@app.errorhandler(500)
+def server_error(_e):
+    return jsonify({'status': 'error', 'message': 'Server error'}), 500
+
 if __name__ == '__main__':
     print('后台管理服务器启动: http://localhost:5000')
-    app.run(debug=True, port=5000)
+    app.run(debug=False, port=5000)
