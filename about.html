@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人履历 - 李佳津个人主页</title>
+  <meta name="description" content="个人履历 — 李佳津，安徽医科大学生物医学工程硕士，计算机视觉与医学人工智能方向">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="index.html" class="nav-brand" data-i18n="nav.brand">个人主页</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" data-i18n="nav.home">首页</a></li>
+      <li><a href="publications.html" data-i18n="nav.publications">论文</a></li>
+      <li><a href="research.html" data-i18n="nav.research">研究</a></li>
+      <li><a href="achievements.html" data-i18n="nav.achievements">成果</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="lang-toggle" id="lang-toggle">EN</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="container about-layout">
+  <h2 class="section-title" data-i18n="about.title">个人履历</h2>
+
+  <!-- 教育经历 时间线 -->
+  <div class="timeline-section">
+    <h3><span aria-hidden="true">🎓</span> <span data-i18n="about.education">教育经历</span></h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date" data-i18n="home.education.msc.date">2023.09 — 至今</div>
+        <div class="timeline-title" data-i18n="home.education.msc">安徽医科大学 · 生物医学工程（硕士）</div>
+        <div class="timeline-desc" data-i18n="home.education.msc.desc">生物医学工程学院 · 电子信息方向（医学人工智能）</div>
+        <div class="timeline-desc timeline-desc-muted" data-i18n="about.msc.achievements">科研成果：以第一或共一作者发表期刊/会议论文5篇，在投期刊论文2篇，授权国家发明专利1项，软著5项，参与省部级科研基金4项，国家级比赛获奖2项</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot past"></div>
+        <div class="timeline-date past">2017.09 — 2021.06</div>
+        <div class="timeline-title" data-i18n="home.education.bsc">曲阜师范大学 · 计算机科学与技术（本科）</div>
+        <div class="timeline-desc" data-i18n="home.education.bsc.desc">计算机学院</div>
+        <div class="timeline-desc timeline-desc-muted" data-i18n="about.bsc.projects">关键项目：基于ARCore的增强现实家居应用APP；基于Vuforia的脑肿瘤病灶三维显示；基于Unity的物理仿真实验系统</div>
+        <div class="timeline-desc timeline-desc-muted" data-i18n="about.bsc.awards">竞赛奖项：中国大学生计算机设计大赛二等奖（2020年山东省移动应用开发组唯一进入国赛复赛的队伍）、全国三维数字化创新设计大赛二等奖等</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 信息卡片 -->
+  <div class="info-cards">
+    <div class="info-card">
+      <h4><span aria-hidden="true">🔍</span> <span data-i18n="about.research">研究方向</span></h4>
+      <p><span data-i18n="about.research.line1">计算机视觉 · 图像分割 · 多目标追踪</span><br><span data-i18n="about.research.line2">超分辨重构 · 超声平面波重建</span><br><span data-i18n="about.research.line3">深度学习在光学和医学图像方面的应用</span></p>
+    </div>
+    <div class="info-card">
+      <h4><span aria-hidden="true">📦</span> <span data-i18n="about.funding">科研基金</span></h4>
+      <p><span data-i18n="about.funding.intro">参与省部级科研基金</span> <strong style="color:var(--accent);"><span data-i18n="about.funding.count">3项</span></strong></p>
+      <p style="font-size:0.78rem;color:var(--text-muted);"><span data-i18n="about.funding.item1">安徽省转化医学研究院科研基金</span><br><span data-i18n="about.funding.item2">安徽省自然科学基金</span><br><span data-i18n="about.funding.item3">法医遗传学公安部重点实验室开放课题</span></p>
+    </div>
+    <div class="info-card">
+      <h4><span aria-hidden="true">📧</span> <span data-i18n="about.contact">联系方式</span></h4>
+      <p><span data-i18n="about.contact.email_label">📮 邮箱：</span>15563866837@163.com<br><span data-i18n="about.contact.phone_label">📱 电话：</span>17852650377</p>
+    </div>
+    <div class="info-card">
+      <h4><span aria-hidden="true">📍</span> <span data-i18n="about.basic">基本信息</span></h4>
+      <p><span data-i18n="about.basic.hometown">籍贯：山东省烟台市</span><br><span data-i18n="about.basic.ethnicity">民族：汉族 · 年龄：26岁</span><br><span data-i18n="about.basic.status">硕士在读</span></p>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p data-i18n="footer.text">© 2026 李佳津. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

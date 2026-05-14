@@ -1,0 +1,65 @@
+<h2>首页卡片标题样式方案</h2>
+<p class="subtitle">选择你喜欢的卡片标题风格 — 以"个人简介"卡片为例，展示标题+内容的不同设计</p>
+
+<div class="cards">
+  <div class="card" data-choice="style-a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#fff;padding:20px;font-family:system-ui;border:1px solid #e2e8f0;border-radius:8px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <div style="width:4px;height:18px;background:#2b6cb0;border-radius:2px;"></div>
+          <span style="font-size:1rem;font-weight:600;color:#1a202c;">个人简介</span>
+        </div>
+        <p style="font-size:0.85rem;color:#4a5568;line-height:1.7;">研究方向为深度学习在光学和医学图像方面的应用...</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>细线 + 标题</h3>
+      <p>左侧4px蓝色竖线 + 深色标题，简洁利落，区分度适中</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="style-b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#fff;padding:20px;font-family:system-ui;border:1px solid #e2e8f0;border-radius:8px;">
+        <div style="font-size:0.7rem;font-weight:600;color:#2b6cb0;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">ABOUT ME</div>
+        <div style="font-size:1.1rem;font-weight:700;color:#1a202c;margin-bottom:12px;">个人简介</div>
+        <p style="font-size:0.85rem;color:#4a5568;line-height:1.7;">研究方向为深度学习在光学和医学图像方面的应用...</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>英文标签 + 中文标题</h3>
+      <p>小号蓝色英文标签在上，中文大标题在下，层次感强，适合学术风格</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="style-c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#fff;padding:20px;font-family:system-ui;border:1px solid #e2e8f0;border-radius:8px;">
+        <div style="background:linear-gradient(135deg,#ebf4ff,#f8fafc);padding:10px 14px;border-radius:6px;margin-bottom:14px;">
+          <span style="font-size:0.92rem;font-weight:600;color:#1e3a5f;">个人简介</span>
+        </div>
+        <p style="font-size:0.85rem;color:#4a5568;line-height:1.7;">研究方向为深度学习在光学和医学图像方面的应用...</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>淡蓝底条 + 标题</h3>
+      <p>标题嵌在浅蓝渐变横条中，视觉突出，分区明确</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="style-d" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#fff;padding:20px;font-family:system-ui;border:1px solid #e2e8f0;border-radius:8px;">
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #e2e8f0;">
+          <span style="font-size:1.3rem;color:#2b6cb0;">◆</span>
+          <span style="font-size:1rem;font-weight:600;color:#1a202c;">个人简介</span>
+        </div>
+        <p style="font-size:0.85rem;color:#4a5568;line-height:1.7;">研究方向为深度学习在光学和医学图像方面的应用...</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>菱形符号 + 底部分割线</h3>
+      <p>蓝色菱形前缀 + 底部细分割线，简洁有设计感</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,212 @@
+
+=== Slide 1 ===
+博士研究生复试答辩
+报考专业: 电子信息
+硕士专业: 生物医学工程
+申 请 人: 李佳津
+研究方向: 医学人工智能
+
+=== Slide 2 ===
+硕士阶段研究进展
+博士阶段学术规划
+目录
+个人基本情况
+2
+
+=== Slide 3 ===
+个人基本情况
+博士阶段学术规划
+个人简介
+硕士阶段研究进展
+教育背景
+姓名：李佳津
+2017.09 ~ 2021.06                         曲阜师范大学                      计算机学院                        计算机科学与技术（本科）
+关键项目：基于ARCore的增强现实家居应用APP；基于Vuforia的脑肿瘤病灶三维显示；基于unity的物理仿真实验系统
+竞赛奖项：中国大学生计算机设计大赛二等奖 (2020年山东省移动应用开发组唯一进入国赛复赛环节的队伍)
+                  全国三维数字化创新设计大赛二等奖
+                  山东省电子与信息大赛等省级A类赛事二等奖四项，三等奖两项
+2023.09 ~ 至今                               安徽医科大学                 生物医学工程学院         电子信息-生物医学工程（硕士）
+科研成果：以第一或共一作者发表论文四篇，在投期刊论文两篇，授权国家发明专利一项，软著五项，参与省部级科研基金四项，
+                  国家级比赛获奖两项
+籍贯：山东省烟台市
+年龄：26岁
+邮箱：15563866837@163.com
+民族：汉族
+电话：17852650377
+研究方向：计算机视觉，图像分割，多目标追踪，超分辨重构，超声平面波重建
+                      （深度学习在光学和医学图像方面的应用）
+3
+
+=== Slide 4 ===
+个人基本情况
+博士阶段学术规划
+硕士阶段研究进展
+论文发表情况（5 篇接收，2 篇返修）
+已接收：
+J. Li, W. Sun, et al. MTCA-Net: Multi-Task Cascade Analysis Network for Real-Time Sperm Tracking and Segmentation, Advanced Intelligent Systems, 2026, e202501452. (中科院二区, JCR Q1,  IF=6.1)
+J. Li, W. Sun, et al. DP-HAFNet: A dual-path hierarchical adaptive fusion network for ultrasound image reconstruction from single plane-wave RF data, Measurement, 2026, 277: 121562. (中科院二区Top, JCR Q1, IF=5.6) 
+W. Sun†, J. Li†, et al. Fast High-Fidelity Fourier Ptychographic Microscopy via Wavelet Transform and Linear Attention, Laser & Photonics Reviews, 2025, e01895. (中科院一区Top, JCR Q1, IF=10)
+J. Li, W. Sun, et al. High-Quality Plane-Wave Image Reconstruction using the U2-Net Deep Learning Model, 2024 IEEE Ultrasonics, Ferroelectrics, and Frequency Control Joint Symposium (UFFC-JS), 2024, pp. 1-4.
+J. Li, W. Sun, et al. LADA Net: A Linear Attention Domain Adaptation Network for Ultrasound Image Reconstruction from Single Plane Wave RF Data, 2025 IEEE International Ultrasonics Symposium (IUS), 2025.
+Y. Xie, J. Li, et al. Resolution Enhancement in Ultrasound Localization Microscopy using a Super-Resolution Generative Adversarial Network, 2025 IEEE International Ultrasonics Symposium (IUS), 2025.
+返修：
+J. Li, W. Sun, et al. HOPE-Net: Mamba-Guided Hybrid Omni-Perceptual Enhanced Network for Sperm Detection, IEEE Journal of Biomedical and Health Informatics, Major Revision. (中科院一区，IF=6.8)
+4
+
+=== Slide 5 ===
+李佳津，孙雯雯，周金华*，MTCA-Net：一种用于精子实时追踪和分割的多任务级联分析网络。2025中国生物医学工程大会暨创新医疗峰会 (BME2025)，口头汇报。
+个人基本情况
+博士阶段学术规划
+硕士阶段研究进展
+周金华，李佳津，孙雯雯，章志国。基于多任务级联分析网络的精子实时追踪与分割方法及其系统，专利号：ZL202510901918.1。（学生一作）
+周金华，李佳津，孙雯雯，何俊。精子医学图像检测系统，软件著作权登记号：2024SR2119779。（学生一作）
+周金华，孙雯雯，李佳津，病理细胞虚拟染色软件2.0，软件著作权登记号：2024SR1769018。
+周金华，孙雯雯，李佳津，病理细胞虚拟染色软件1.0，软件著作权登记号：2024SR0880019。
+周金华，孙雯雯，李佳津 等，基于U-net的精子头部分割软件2.0，软件著作权登记号：2025SR0051240。
+周金华，孙雯雯，李佳津 等，基于U-net的精子头部分割软件1.0，软件著作权登记号：2024SR0698807。
+学科竞赛（国赛一等奖 2 项，二等奖 1 项）
+国家发明专利与软著（授权专利 1 项，软著 5 项）
+孙雯雯，李佳津，姜翔等。精益求精——面向ICSI的精子实时智能分析系统，第十届全国大学生生物医学工程创新设计竞赛，2025，国赛一等奖。（算法设计与软件开发）
+孙雯雯，李佳津等。基于深度学习的计算机辅助精子分析（CASA）软件，第九届全国大学生生物医学工程创新设计竞赛，2024，国赛二等奖。（算法设计与软件开发）
+潘浩宇，姜翔，范欣雨，贺紫怡，李佳津。优生优育-精子质量检测与优选仪器，第十届全国大学生生物医学工程创新设计竞赛，2025，国赛一等奖。
+学术会议（口头汇报 1 次）
+5
+
+=== Slide 6 ===
+不孕不育影响全球 1.86 亿人[1] ，男性因素占20%-70%[2]。
+[1] Ziouziou Imad, Rambhatla Amarnath, Shah Rupin, Agarwal Ashok. Sperm DNA Fragmentation and Infertility: A Narrative Review. World Journal of Urology, 2024, 42(1): 408.
+[2] Agarwal Ashok, Mulgund Aditi, Hamada Alaa, Chyatte Michelle Renee. A unique view on male infertility around the globe. Reproductive Biology and Endocrinology, 2015, 13: 1-9.
+[3] Esteves Sandro C, Roque Matheus, Bedoschi Giuliano, Haahr Thor, Humaidan Peter. Intracytoplasmic Sperm Injection for Male Infertility and Consequences for Offspring. Nature Reviews Urology, 2018, 15(9): 535-62.
+[4] Dai Changsheng, Zhang Zhuoran, Shan Guanqiao, Chu Lap-Tak, Huang Zongjie, Moskovtsev Sergey, Librach Clifford, Jarvi Keith, Sun Yu. Advances in Sperm Analysis: Techniques, Discoveries and Applications. Nature Reviews Urology, 2021, 18(8): 447-67.
+个人基本情况
+博士阶段学术规划
+硕士阶段研究进展
+单精子质量在后续囊胚发育和后代健康中尤为重要！
+研究内容一: 基于深度学习的实时精子质量评估
+针对少精子症等男性不育疾病，临床上普遍采用人类卵胞质内单精子注射（ICSI）[3]。
+ICSI 通过人工挑选单个活精子注入卵母细胞完成受精，该精子质量影响临床种植率和婴儿出生率[4]。
+6
+
+=== Slide 7 ===
+[1] J. M. Rodenburg and H. M. L. Faulkner. A phase retrieval algorithm for shifting illumination, Applied Physics Letters, 2004, 85: 4795-4797.
+[2] G. Zheng, et al. Concept, implementations and applications of Fourier ptychography, Nature Reviews Physics, 2021, 3: 207-223. 
+[3] Y. Fan, et al. Efficient Synthetic Aperture for Phaseless Fourier Ptychographic Microscopy with Hybrid Coherent and Incoherent Illumination, Laser & Photonics Reviews, 2023, 17: 2200201.
+个人基本情况
+博士阶段学术规划
+硕士阶段研究进展
+人类卵胞质内单精子注射（ICSI）面临的问题
+开发了基于深度学习的精子实时分析算法和系统，实时量化评估活力和形态并联合分析挑选健康精子
+WHO标注人类精子一些异常形态的示意图
+7
+
+=== Slide 8 ===
+数据集：与安医一附院生殖中心合作，在60倍水浸物镜下拍摄精子图像，形成3166个分割样本和397个检测样本，用于网络的训练和测试
+训练环境：NVIDIA RTX 3090
+多任务级联分析网络 (Multi-Task Cascade Analysis Network，MTCA-Net)
+个人基本情况
+博士阶段学术规划
+硕士阶段研究进展
+94 FPS
+51 FPS
+1920×1200
+1920×1200
+8
+
+=== Slide 9 ===
+个人基本情况
+博士阶段学术规划
+硕士阶段研究进展
+MTCA-Net算法
+论文已被Advanced Intelligent Systems (IF=6.1)接收
+授权国家发明专利一项
+精子分析软件
+第十届全国大学生生物医学工程创新设计竞赛国赛一等奖
+第九届全国大学生生物医学工程创新设计竞赛国赛二等奖
+申请软件著作权三项
+此项目已参与安徽省转化医学研究院科研基金
+                        安徽省自然科学基金
+                        法医遗传学公安部重点实验室开放课题
+将所提算法封装为软件，与奥林巴斯显微镜集成，构建可准确量化精子活力与形态学参数的计算显微系统。
+获得成果
+研究结果
+9
+
+=== Slide 10 ===
+网络结构
+个人基本情况
+博士阶段学术规划
+硕士阶段研究进展
+用于复杂场景中精子检测的混合全感知增强网络 (HOPE-Net)
+实验结果
+背景：临床场景中杂质较多并且形态与精子相似，CNN感受野局限，Transformer复杂度太高。
+方法：设计了Mamba引导的ShuffleNet (MGS-Net)为主干网络，混合状态空间路径聚合网络 (HSS-PAN)为颈部网络。
+意义： HOPE-Net能够同时兼顾局部细节特征与全局上下文信息，通过选择性扫描机制自适应地聚焦于关键区域。
+相关论文投稿至 IEEE Journal of Biomedical and Health Informatics (中科院一区，IF=6.8)，返修中
+背景
+10
+
+=== Slide 11 ===
+个人基本情况
+博士阶段学术规划
+硕士阶段研究进展
+研究内容二: 基于小波变换和线性注意力的快速高保真傅里叶叠层显微成像
+WM-FPM
+结果展示
+性能比较
+对于单张1.51亿像素图像，WM-FPM重建时间仅需5.63秒，相比传统迭代算法提速超100倍且无需牺牲重建保真度。
+论文已被 Laser & Photonics Reviews (中科院一区Top，IF=10) 接收
+结合小波变换和线性注意力机制的生成对抗架构
+11
+
+=== Slide 12 ===
+个人基本情况
+博士阶段学术规划
+硕士阶段研究进展
+U2-Net 网络架构
+结果展示
+维纳后置滤波器与最小方差相结合的方法（RMTW-ESCMV）
+单角度相干平面波叠加（CPWC）
+75个角度 CPWC
+可学习（基于U2-Net）的 RMTW-ESCMV
+论文
+论文已被2024 IEEE Ultrasonics, Ferroelectrics, and Frequency Control Joint Symposium (UFFC-JS) 接收，并做会议口头汇报
+研究内容三: 基于深度学习的超声平面波重建 — U2-Net重建单角度平面波图像
+12
+基于U2-Net的可学习波束形成器在成像质量媲美传统方法的同时显著降低了计算复杂度
+
+=== Slide 13 ===
+个人基本情况
+博士阶段学术规划
+硕士阶段研究进展
+用于从单平面波射频数据重建超声图像的双路径分层自适应融合网络 (DP-HAFNet)
+DP-HAFNet 网络架构
+结果展示
+基于DP-HAFNet的自适应波束形成器可同时预测基于像素的自适应权重输出和基于通道加权的波束形成输出，有效抑制旁瓣和噪声，提升分辨率与对比度同时保留斑点纹理。
+论文
+初版算法论文已被超声顶会2025 IEEE International Ultrasonics Symposium (IUS) 接收，并获得组委会学生旅行补助 (Student Travel Grant);
+最新版论文已投稿至Measurement (中科院二区, IF=5.6), 返修中。
+13
+
+=== Slide 14 ===
+个人基本情况
+博士阶段学术规划
+硕士阶段研究进展
+14
+博士研究内容
+痛点：1.传统光声重建依赖理想物理假设，抗噪弱、采样伪影重、细节丢失[1]；
+   2.纯数据驱动深度学习无物理约束，泛化性差、易产生非物理失真[2]。
+解决方案：构建融合物理先验知识的深度学习框架，实现低噪声、高物理保真的光声成像。
+物理先验约束的深度学习光声成像去噪算法研究
+[1] Ma HG, Ren SL, Wei X et al. Enhanced photoacoustic microscopy with physics-embedded degeneration learning. Opto-Electronic Advances, 2025, 8: 240189.
+[2] J.Zhang, K.Zhang, X.Tang et al. Physics-Guided Deep Learning for 3D Photoacoustic Microscopy. Laser & Photonics Reviews, 2025, 19: 2500352.
+
+=== Slide 15 ===
+15
+个人基本情况
+硕士阶段研究进展
+博士阶段学术规划
+博士研究计划
+
+=== Slide 16 ===
+申请人：李佳津
+恳请老师多多批评指正！
