@@ -7,18 +7,18 @@
 
 {% block content %}
 <h2 class="section-title" data-i18n="pub.title">学术论文</h2>
-<p class="section-subtitle" data-i18n="pub.subtitle">5篇已接收 · 2篇返修中</p>
+<p class="section-subtitle" data-i18n="pub.subtitle">5篇已接收 · 2篇审稿中</p>
 
 <div class="filter-tags">
   <button class="filter-tag active" data-filter="all" data-i18n="pub.filter.all" aria-pressed="true">全部</button>
   <button class="filter-tag" data-filter="published" data-i18n="pub.filter.published" aria-pressed="false">已接收</button>
-  <button class="filter-tag" data-filter="revision" data-i18n="pub.filter.revision" aria-pressed="false">返修中</button>
+  <button class="filter-tag" data-filter="review" data-i18n="pub.filter.revision" aria-pressed="false">审稿中</button>
   <button class="filter-tag" data-filter="conference" data-i18n="pub.filter.conference" aria-pressed="false">会议论文</button>
 </div>
 
 <div class="pub-list">
   {% for pub in content.publications %}
-  <div class="pub-card{% if pub.revision %} revision{% endif %}" data-category="{{ pub.category }}">
+  <div class="pub-card{% if pub.review %} review{% endif %}" data-category="{{ pub.category }}">
     <div class="pub-title">{% if pub.link %}<a href="{{ pub.link }}" target="_blank" rel="noopener">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}</div>
     <div class="pub-authors">{{ pub.authors }}</div>
     <div class="pub-journal">{{ pub.journal }}</div>

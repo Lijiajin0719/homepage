@@ -458,6 +458,7 @@ ol {
   display: none;
 }
 
+.pub-card.review,
 .pub-card.revision {
   border-left-color: var(--warning);
   background: #fffff8;
