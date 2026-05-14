@@ -176,7 +176,7 @@
       "category": "published",
       "journal": "Laser & Photonics Reviews, 2025, e01895",
       "link": "https://onlinelibrary.wiley.com/doi/10.1002/lpor.202501895",
-      "review": false,
+      "review": true,
       "title": "Fast High-Fidelity Fourier Ptychographic Microscopy via Wavelet Transform and Linear Attention"
     },
     {
