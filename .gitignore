@@ -1,20 +1,3 @@
-# Dependencies
-node_modules/
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-
-# Git
-.git/
-
-# Temp files
-*.tmp
-*.log
-
-# Local server files
-.server/
+.superpowers/
+docs/superpowers/
+tunnel_serveo.py
