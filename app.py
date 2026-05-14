@@ -53,6 +53,8 @@ def do_build():
 @app.route('/api/publish', methods=['POST'])
 def do_publish():
     try:
+        # Pull latest from remote first
+        subprocess.run(['git', 'pull', 'origin', 'main'], check=True, capture_output=True)
         # Stage all changes
         subprocess.run(['git', 'add', '-A'], check=True, capture_output=True)
         # Commit
