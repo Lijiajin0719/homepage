@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}获奖成果 - 李佳津个人主页{% endblock %}
+{% block description %}获奖与成果 — 李佳津，国家级竞赛一等奖2项，发明专利1项，软件著作权5项{% endblock %}
+
+{% block main_class %} main-content{% endblock %}
+
+{% block content %}
+<h2 class="section-title" data-i18n="achieve.title">获奖与成果</h2>
+
+<div class="achievements-grid">
+  <!-- 竞赛卡片 -->
+  <div class="achieve-card">
+    <div class="achieve-icon" aria-hidden="true">🏆</div>
+    <h3 data-i18n="achieve.competition">学科竞赛</h3>
+    <div class="detail">
+      <p><span class="highlight-gold">国赛一等奖 ×{{ content.achievements.competitions.gold|length }}</span></p>
+      {% for item in content.achievements.competitions.gold %}
+      <p>{{ item.zh }}</p>
+      {% endfor %}
+      <p style="margin-top:8px;"><span class="highlight">国赛二等奖 ×{{ content.achievements.competitions.silver|length }}</span></p>
+      {% for item in content.achievements.competitions.silver %}
+      <p>{{ item.zh }}</p>
+      {% endfor %}
+      <p class="detail-muted" style="margin-top:6px;">{{ content.achievements.competitions.others.zh }}</p>
+    </div>
+  </div>
+
+  <!-- 专利卡片 -->
+  <div class="achieve-card">
+    <div class="achieve-icon" aria-hidden="true">📜</div>
+    <h3 data-i18n="achieve.patent">国家发明专利</h3>
+    <div class="detail">
+      <p><span class="highlight">{{ content.achievements.patent.count }}</span></p>
+      <p style="font-weight:500;">{{ content.achievements.patent.title }}</p>
+      <p><span>专利号：</span>{{ content.achievements.patent.number }}</p>
+      <p class="detail-muted-sm">{{ content.achievements.patent.inventors }}</p>
+    </div>
+  </div>
+
+  <!-- 软著卡片 -->
+  <div class="achieve-card">
+    <div class="achieve-icon" aria-hidden="true">💻</div>
+    <h3 data-i18n="achieve.software">软件著作权</h3>
+    <div class="detail">
+      <p><span class="highlight">已登记 {{ content.achievements.software|length }}项</span></p>
+      {% for soft in content.achievements.software %}
+      <p><span>{{ soft.zh }}</span><br><span class="detail-muted">登记号：{{ soft.number }}</span></p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- 参会卡片 -->
+  <div class="achieve-card">
+    <div class="achieve-icon" aria-hidden="true">🎤</div>
+    <h3 data-i18n="achieve.conference">学术会议</h3>
+    <div class="detail">
+      <p><span class="highlight">口头汇报 1次</span></p>
+      <p>{{ content.achievements.conference.description }}</p>
+      <p style="font-size:0.82rem;">{{ content.achievements.conference.report }}</p>
+      <p class="detail-muted-sm" style="margin-top:8px;">{{ content.achievements.conference.extra }}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

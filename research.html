@@ -28,154 +28,240 @@
 </nav>
 
 <main class="container main-content">
-  <h2 class="section-title" data-i18n="research.title">研究项目</h2>
-  <p class="section-subtitle" data-i18n="research.subtitle">深度学习在医学图像处理中的应用</p>
 
-  <!-- Anchor navigation pills - grouped by research area -->
-  <div class="research-nav">
-    <button class="research-nav-item active" data-scroll="project-sperm" data-i18n="research.nav.sperm">精子分析</button>
-    <button class="research-nav-item" data-scroll="project-fpm" data-i18n="research.nav.fpm">FPM成像</button>
-    <button class="research-nav-item" data-scroll="project-ultrasound" data-i18n="research.nav.ultrasound">超声重建</button>
-    <button class="research-nav-item" data-scroll="project-photoacoustic" data-i18n="research.nav.photoacoustic">光声成像</button>
+<h2 class="section-title" data-i18n="research.title">研究项目</h2>
+<p class="section-subtitle" data-i18n="research.subtitle">深度学习在医学图像处理中的应用</p>
+
+
+
+
+<!-- Anchor navigation pills - grouped by research area -->
+<div class="research-nav">
+  
+  <button class="research-nav-item active" data-scroll="project-fpm" data-i18n="research.nav.fpm">FPM成像</button>
+  
+  <button class="research-nav-item" data-scroll="project-photoacoustic" data-i18n="research.nav.photoacoustic">光声成像</button>
+  
+  <button class="research-nav-item" data-scroll="project-sperm" data-i18n="research.nav.sperm">精子分析</button>
+  
+  <button class="research-nav-item" data-scroll="project-ultrasound" data-i18n="research.nav.ultrasound">超声重建</button>
+  
+</div>
+
+
+
+<section id="project-fpm">
+  <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-dark);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--accent);">研究内容二：基于小波变换和线性注意力的快速高保真傅里叶叠层显微成像</h3>
+
+  
+  <div class="research-project">
+    
+    <img src="assets/images/image26.jpg" alt="WM-FPM：小波变换与线性注意力结合的生成对抗架构" class="project-banner" loading="lazy">
+    
+    <div class="project-body">
+      <h3>WM-FPM：小波变换与线性注意力结合的生成对抗架构</h3>
+      
+      <p><strong>背景：</strong><span>傅里叶叠层显微成像（FPM）可实现大视场高分辨率成像，突破物镜数值孔径与空间带宽积的限制。但传统迭代FPM重建算法（如基于平移照明的相位恢复算法）速度极慢，难以实时应用。</span></p>
+      
+      <p><strong>方法：</strong><span>提出结合小波变换和线性注意力机制的生成对抗架构（WM-FPM）。将图像分解到小波域进行处理，利用线性注意力降低长距离依赖的计算复杂度，在保证重建质量的同时大幅提升推理速度。</span></p>
+      
+      <p><strong>结果：</strong><span>对于单张1.51亿像素图像，WM-FPM重建时间仅需5.63秒，相比传统迭代算法提速超100倍且无需牺牲重建保真度。该方法在低光剂量条件下同样表现优异。</span></p>
+      
+      <div class="project-tags">
+        
+        <span class="badge badge-green">Laser & Photonics Reviews 2025 · IF=10</span>
+        
+        <span class="badge badge-green">中科院一区Top · JCR Q1</span>
+        
+        <span class="badge badge-gray">共一作者 (W. Sun†, J. Li†)</span>
+        
+      </div>
+    </div>
   </div>
+  
+</section>
 
-  <!-- ===== 研究内容一：精子质量评估 ===== -->
-  <section id="project-sperm">
-    <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-dark);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--accent);" data-i18n="research.sperm.heading">研究内容一：基于深度学习的实时精子质量评估</h3>
 
-    <!-- MTCA-Net -->
-    <div class="research-project">
-      <img src="assets/images/image10.jpeg" alt="MTCA-Net Architecture" class="project-banner" loading="lazy">
-      <div class="project-body">
-        <h3 data-i18n="research.mtca.title">MTCA-Net：多任务级联分析网络</h3>
-        <p><strong data-i18n="research.label.background">背景：</strong><span data-i18n="research.mtca.background">不孕不育影响全球1.86亿人，男性因素占20%-70%。临床上普遍采用人类卵胞质内单精子注射（ICSI），需人工挑选单个活精子注入卵母细胞完成受精，该精子质量直接影响临床种植率和婴儿出生率。传统手工精子分析效率低、主观性强。</span></p>
-        <p><strong data-i18n="research.label.dataset">数据集：</strong><span data-i18n="research.mtca.dataset">与安徽医科大学第一附属医院生殖中心合作，在60倍水浸物镜下拍摄精子图像，共形成3166个分割样本和397个检测样本，用于网络训练和测试。训练环境：NVIDIA RTX 3090。</span></p>
-        <p><strong data-i18n="research.label.method">方法：</strong><span data-i18n="research.mtca.method">提出多任务级联分析网络（MTCA-Net），将目标检测、实例分割、运动追踪等任务统一到端到端框架中。在1920×1200分辨率下实现94 FPS实时精子追踪与分割，51 FPS联合分析，可同时量化评估精子活力与形态学参数。</span></p>
-        <p><strong data-i18n="research.label.deploy">应用落地：</strong><span data-i18n="research.mtca.deploy">将MTCA-Net算法封装为软件，与奥林巴斯显微镜集成，构建可准确量化精子活力与形态学参数的计算显微系统。</span></p>
-        <div class="project-tags">
-          <span class="badge badge-blue">Advanced Intelligent Systems 2026 · IF 6.1</span>
-          <span class="badge badge-green" data-i18n="research.badge.cas_q2">中科院二区 · JCR Q1</span>
-          <span class="badge badge-green" data-i18n="research.badge.patent">发明专利 ZL202510901918.1</span>
-          <span class="badge badge-green" data-i18n="research.badge.soft_copyrights">软著×3</span>
-          <span class="badge badge-green" data-i18n="research.badge.nat_first_2025">国赛一等奖 (2025)</span>
-          <span class="badge badge-green" data-i18n="research.badge.nat_second_2024">国赛二等奖 (2024)</span>
-          <span class="badge badge-gray" data-i18n="research.badge.bme_oral">BME2025 口头汇报</span>
-        </div>
+<section id="project-photoacoustic">
+  <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-dark);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--accent);">博士研究计划：物理先验约束的深度学习光声成像去噪算法</h3>
+
+  
+  <div class="research-project">
+    
+    <div class="project-body">
+      <h3>融合物理先验知识的深度学习光声成像框架</h3>
+      
+      <p><strong>痛点一：</strong><span>传统光声重建依赖理想物理假设（如均匀介质、点探测器），实际成像中存在声学衰减、非均匀传播、探测器响应不理想等问题，导致重建图像噪声大、采样伪影重、细节丢失严重。</span></p>
+      
+      <p><strong>痛点二：</strong><span>纯数据驱动的深度学习方法虽能从大量数据中学习映射关系，但缺乏物理约束，泛化性差，易产生非物理失真，在临床应用中存在可靠性风险。</span></p>
+      
+      <p><strong>解决方案：</strong><span>构建融合物理先验知识的深度学习框架，将光声成像的物理模型（波动方程、声传播算子、探测器模型）嵌入网络架构或损失函数中，实现低噪声、高物理保真的光声成像。</span></p>
+      
+      <p><strong>预期贡献：</strong><span>物理先验与深度学习的有机结合，有望突破现有光声成像的质量瓶颈，为光声显微成像在微血管网络、肿瘤微环境等生物医学应用中的定量分析提供可靠工具。</span></p>
+      
+      <div class="project-tags">
+        
+        <span class="badge badge-blue">博士研究计划</span>
+        
+        <span class="badge badge-blue">光声成像</span>
+        
+        <span class="badge badge-blue">物理先验约束</span>
+        
+        <span class="badge badge-blue">深度学习去噪</span>
+        
       </div>
     </div>
+  </div>
+  
+</section>
 
-    <!-- HOPE-Net -->
-    <div class="research-project">
-      <img src="assets/images/image20.jpg" alt="HOPE-Net Architecture" class="project-banner" loading="lazy">
-      <div class="project-body">
-        <h3 data-i18n="research.hope.title">HOPE-Net：Mamba引导的混合全感知增强网络</h3>
-        <p><strong data-i18n="research.label.background">背景：</strong><span data-i18n="research.hope.background">临床场景中杂质较多且形态与精子相似，传统CNN感受野局限于局部区域，Transformer虽能建模全局依赖但计算复杂度高，难以在实时性要求下部署。</span></p>
-        <p><strong data-i18n="research.label.method">方法：</strong><span data-i18n="research.hope.method">设计了Mamba引导的ShuffleNet（MGS-Net）为主干网络，混合状态空间路径聚合网络（HSS-PAN）为颈部网络。HOPE-Net能够同时兼顾局部细节特征与全局上下文信息，通过选择性扫描机制自适应地聚焦于关键区域，在复杂临床场景中实现鲁棒的精子检测。</span></p>
-        <div class="project-tags">
-          <span class="badge badge-yellow">IEEE JBHI · Major Revision</span>
-          <span class="badge badge-yellow" data-i18n="research.badge.cas_q1_if">中科院一区 · IF 6.8</span>
-          <span class="badge badge-blue" data-i18n="research.badge.mamba_ssm">Mamba · 状态空间模型</span>
-        </div>
+
+<section id="project-sperm">
+  <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-dark);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--accent);">研究内容一：基于深度学习的实时精子质量评估</h3>
+
+  
+  <div class="research-project">
+    
+    <img src="assets/images/image10.jpeg" alt="MTCA-Net：多任务级联分析网络" class="project-banner" loading="lazy">
+    
+    <div class="project-body">
+      <h3>MTCA-Net：多任务级联分析网络</h3>
+      
+      <p><strong>背景：</strong><span>不孕不育影响全球1.86亿人，男性因素占20%-70%。临床上普遍采用人类卵胞质内单精子注射（ICSI），需人工挑选单个活精子注入卵母细胞完成受精，该精子质量直接影响临床种植率和婴儿出生率。传统手工精子分析效率低、主观性强。</span></p>
+      
+      <p><strong>数据集：</strong><span>与安徽医科大学第一附属医院生殖中心合作，在60倍水浸物镜下拍摄精子图像，共形成3166个分割样本和397个检测样本，用于网络训练和测试。训练环境：NVIDIA RTX 3090。</span></p>
+      
+      <p><strong>方法：</strong><span>提出多任务级联分析网络（MTCA-Net），将目标检测、实例分割、运动追踪等任务统一到端到端框架中。在1920×1200分辨率下实现94 FPS实时精子追踪与分割，51 FPS联合分析，可同时量化评估精子活力与形态学参数。</span></p>
+      
+      <p><strong>应用落地：</strong><span>将MTCA-Net算法封装为软件，与奥林巴斯显微镜集成，构建可准确量化精子活力与形态学参数的计算显微系统。</span></p>
+      
+      <div class="project-tags">
+        
+        <span class="badge badge-blue">Advanced Intelligent Systems 2026 · IF 6.1</span>
+        
+        <span class="badge badge-green">中科院二区 · JCR Q1</span>
+        
+        <span class="badge badge-green">发明专利 ZL202510901918.1</span>
+        
+        <span class="badge badge-green">软著×3</span>
+        
+        <span class="badge badge-green">国赛一等奖 (2025)</span>
+        
+        <span class="badge badge-green">国赛二等奖 (2024)</span>
+        
+        <span class="badge badge-gray">BME2025 口头汇报</span>
+        
       </div>
     </div>
-  </section>
-
-  <!-- ===== 研究内容二：FPM成像 ===== -->
-  <section id="project-fpm">
-    <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-dark);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--accent);" data-i18n="research.fpm.heading">研究内容二：基于小波变换和线性注意力的快速高保真傅里叶叠层显微成像</h3>
-
-    <!-- WM-FPM -->
-    <div class="research-project">
-      <img src="assets/images/image26.jpg" alt="WM-FPM Architecture" class="project-banner" loading="lazy">
-      <div class="project-body">
-        <h3 data-i18n="research.wmfp.title">WM-FPM：小波变换与线性注意力结合的生成对抗架构</h3>
-        <p><strong data-i18n="research.label.background">背景：</strong><span data-i18n="research.wmfp.background">傅里叶叠层显微成像（FPM）可实现大视场高分辨率成像，突破物镜数值孔径与空间带宽积的限制。但传统迭代FPM重建算法（如基于平移照明的相位恢复算法）速度极慢，难以实时应用。</span></p>
-        <p><strong data-i18n="research.label.method">方法：</strong><span data-i18n="research.wmfp.method">提出结合小波变换和线性注意力机制的生成对抗架构（WM-FPM）。将图像分解到小波域进行处理，利用线性注意力降低长距离依赖的计算复杂度，在保证重建质量的同时大幅提升推理速度。</span></p>
-        <p><strong data-i18n="research.label.result">结果：</strong><span data-i18n="research.wmfp.result">对于单张1.51亿像素图像，WM-FPM重建时间仅需5.63秒，相比传统迭代算法提速超100倍且无需牺牲重建保真度。该方法在低光剂量条件下同样表现优异。</span></p>
-        <div class="project-tags">
-          <span class="badge badge-green">Laser & Photonics Reviews 2025 · IF=10</span>
-          <span class="badge badge-green" data-i18n="research.badge.cas_q1_top">中科院一区Top · JCR Q1</span>
-          <span class="badge badge-gray" data-i18n="research.badge.co_first">共一作者 (W. Sun†, J. Li†)</span>
-        </div>
+  </div>
+  
+  <div class="research-project">
+    
+    <img src="assets/images/image20.jpg" alt="HOPE-Net：Mamba引导的混合全感知增强网络" class="project-banner" loading="lazy">
+    
+    <div class="project-body">
+      <h3>HOPE-Net：Mamba引导的混合全感知增强网络</h3>
+      
+      <p><strong>背景：</strong><span>临床场景中杂质较多且形态与精子相似，传统CNN感受野局限于局部区域，Transformer虽能建模全局依赖但计算复杂度高，难以在实时性要求下部署。</span></p>
+      
+      <p><strong>方法：</strong><span>设计了Mamba引导的ShuffleNet（MGS-Net）为主干网络，混合状态空间路径聚合网络（HSS-PAN）为颈部网络。HOPE-Net能够同时兼顾局部细节特征与全局上下文信息，通过选择性扫描机制自适应地聚焦于关键区域，在复杂临床场景中实现鲁棒的精子检测。</span></p>
+      
+      <div class="project-tags">
+        
+        <span class="badge badge-yellow">IEEE JBHI · Major Revision</span>
+        
+        <span class="badge badge-yellow">中科院一区 · IF 6.8</span>
+        
+        <span class="badge badge-blue">Mamba · 状态空间模型</span>
+        
       </div>
     </div>
-  </section>
+  </div>
+  
+</section>
 
-  <!-- ===== 研究内容三：超声平面波重建 ===== -->
-  <section id="project-ultrasound">
-    <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-dark);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--accent);" data-i18n="research.ultrasound.heading">研究内容三：基于深度学习的超声平面波重建</h3>
 
-    <!-- U2-Net -->
-    <div class="research-project">
-      <img src="assets/images/image28.jpg" alt="U2-Net Architecture" class="project-banner" loading="lazy">
-      <div class="project-body">
-        <h3 data-i18n="research.u2net.title">U2-Net：基于U²-Net的可学习波束形成器</h3>
-        <p><strong data-i18n="research.label.background">背景：</strong><span data-i18n="research.u2net.background">平面波超声成像在单角度发射时帧率极高但图像质量差，多角度相干复合（CPWC）虽提升质量但帧率降低、计算复杂。传统自适应波束形成器（如最小方差法）依赖精确协方差矩阵估计，计算复杂度高。</span></p>
-        <p><strong data-i18n="research.label.method">方法：</strong><span data-i18n="research.u2net.method">提出基于U²-Net深度学习模型的可学习波束形成器，从单角度平面波射频数据重建高质量超声图像。成像质量媲美传统75角度CPWC复合方法，同时显著降低计算复杂度。提出维纳后置滤波器与最小方差相结合的方法（RMTW-ESCMV）进一步提升成像质量。</span></p>
-        <div class="project-tags">
-          <span class="badge badge-blue">IEEE UFFC-JS 2024</span>
-          <span class="badge badge-blue" data-i18n="research.badge.oral">口头汇报</span>
-          <span class="badge badge-gray" data-i18n="research.badge.single_angle">单角度平面波重建</span>
-        </div>
+<section id="project-ultrasound">
+  <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-dark);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--accent);">研究内容三：基于深度学习的超声平面波重建</h3>
+
+  
+  <div class="research-project">
+    
+    <img src="assets/images/image28.jpg" alt="U2-Net：基于U²-Net的可学习波束形成器" class="project-banner" loading="lazy">
+    
+    <div class="project-body">
+      <h3>U2-Net：基于U²-Net的可学习波束形成器</h3>
+      
+      <p><strong>背景：</strong><span>平面波超声成像在单角度发射时帧率极高但图像质量差，多角度相干复合（CPWC）虽提升质量但帧率降低、计算复杂。传统自适应波束形成器（如最小方差法）依赖精确协方差矩阵估计，计算复杂度高。</span></p>
+      
+      <p><strong>方法：</strong><span>提出基于U²-Net深度学习模型的可学习波束形成器，从单角度平面波射频数据重建高质量超声图像。成像质量媲美传统75角度CPWC复合方法，同时显著降低计算复杂度。提出维纳后置滤波器与最小方差相结合的方法（RMTW-ESCMV）进一步提升成像质量。</span></p>
+      
+      <div class="project-tags">
+        
+        <span class="badge badge-blue">IEEE UFFC-JS 2024</span>
+        
+        <span class="badge badge-blue">口头汇报</span>
+        
+        <span class="badge badge-gray">单角度平面波重建</span>
+        
       </div>
     </div>
-
-    <!-- DP-HAFNet -->
-    <div class="research-project">
-      <img src="assets/images/image30.jpg" alt="DP-HAFNet Architecture" class="project-banner" loading="lazy">
-      <div class="project-body">
-        <h3 data-i18n="research.dphaf.title">DP-HAFNet：双路径分层自适应融合网络</h3>
-        <p><strong data-i18n="research.label.background">背景：</strong><span data-i18n="research.dphaf.background">单一路径的深度学习波束形成器难以同时优化像素级重建质量和通道级特征表示，在旁瓣抑制和斑点纹理保留之间存在权衡。</span></p>
-        <p><strong data-i18n="research.label.method">方法：</strong><span data-i18n="research.dphaf.method">提出双路径分层自适应融合网络（DP-HAFNet），可同时预测基于像素的自适应权重输出和基于通道加权的波束形成输出。通过双路径架构与分层融合策略，有效抑制旁瓣和噪声，提升分辨率与对比度的同时保留斑点纹理。</span></p>
-        <div class="project-tags">
-          <span class="badge badge-blue">Measurement 2026 · IF=5.6</span>
-          <span class="badge badge-green" data-i18n="research.badge.cas_q2_top">中科院二区Top · JCR Q1</span>
-          <span class="badge badge-blue" data-i18n="research.badge.dual_path">双路径自适应融合</span>
-        </div>
+  </div>
+  
+  <div class="research-project">
+    
+    <img src="assets/images/image30.jpg" alt="DP-HAFNet：双路径分层自适应融合网络" class="project-banner" loading="lazy">
+    
+    <div class="project-body">
+      <h3>DP-HAFNet：双路径分层自适应融合网络</h3>
+      
+      <p><strong>背景：</strong><span>单一路径的深度学习波束形成器难以同时优化像素级重建质量和通道级特征表示，在旁瓣抑制和斑点纹理保留之间存在权衡。</span></p>
+      
+      <p><strong>方法：</strong><span>提出双路径分层自适应融合网络（DP-HAFNet），可同时预测基于像素的自适应权重输出和基于通道加权的波束形成输出。通过双路径架构与分层融合策略，有效抑制旁瓣和噪声，提升分辨率与对比度的同时保留斑点纹理。</span></p>
+      
+      <div class="project-tags">
+        
+        <span class="badge badge-blue">Measurement 2026 · IF=5.6</span>
+        
+        <span class="badge badge-green">中科院二区Top · JCR Q1</span>
+        
+        <span class="badge badge-blue">双路径自适应融合</span>
+        
       </div>
     </div>
-
-    <!-- LADA Net -->
-    <div class="research-project">
-      <img src="assets/images/imageLADANet.jpg" alt="LADA Net Architecture" class="project-banner" loading="lazy">
-      <div class="project-body">
-        <h3 data-i18n="research.lada.title">LADA Net：线性注意力域自适应网络</h3>
-        <p><strong data-i18n="research.label.background">背景：</strong><span data-i18n="research.lada.background">深度学习超声重建方法通常依赖大量配对的仿真-实测训练数据，域偏移问题导致网络在未见过的数据分布上泛化性能下降。域自适应融合是解决该问题的关键方向。</span></p>
-        <p><strong data-i18n="research.label.method">方法：</strong><span data-i18n="research.lada.method">提出基于线性注意力机制的域自适应网络（LADA Net），通过线性注意力高效建模跨域长距离依赖关系，减少对配准训练数据的依赖。在源域和目标域之间实现高效的特征对齐，提升跨域泛化能力。</span></p>
-        <div class="project-tags">
-          <span class="badge badge-blue">IEEE IUS 2025</span>
-          <span class="badge badge-green">Student Travel Grant</span>
-          <span class="badge badge-blue" data-i18n="research.badge.domain_adapt">域自适应</span>
-        </div>
+  </div>
+  
+  <div class="research-project">
+    
+    <img src="assets/images/imageLADANet.jpg" alt="LADA Net：线性注意力域自适应网络" class="project-banner" loading="lazy">
+    
+    <div class="project-body">
+      <h3>LADA Net：线性注意力域自适应网络</h3>
+      
+      <p><strong>背景：</strong><span>深度学习超声重建方法通常依赖大量配对的仿真-实测训练数据，域偏移问题导致网络在未见过的数据分布上泛化性能下降。域自适应融合是解决该问题的关键方向。</span></p>
+      
+      <p><strong>方法：</strong><span>提出基于线性注意力机制的域自适应网络（LADA Net），通过线性注意力高效建模跨域长距离依赖关系，减少对配准训练数据的依赖。在源域和目标域之间实现高效的特征对齐，提升跨域泛化能力。</span></p>
+      
+      <div class="project-tags">
+        
+        <span class="badge badge-blue">IEEE IUS 2025</span>
+        
+        <span class="badge badge-green">Student Travel Grant</span>
+        
+        <span class="badge badge-blue">域自适应</span>
+        
       </div>
     </div>
-  </section>
+  </div>
+  
+</section>
 
-  <!-- ===== 博士研究计划：光声成像 ===== -->
-  <section id="project-photoacoustic">
-    <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-dark);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--accent);" data-i18n="research.photo.heading">博士研究计划：物理先验约束的深度学习光声成像去噪算法</h3>
 
-    <div class="research-project">
-      <div class="project-body">
-        <h3 data-i18n="research.photo.title">融合物理先验知识的深度学习光声成像框架</h3>
-        <p><strong data-i18n="research.label.pain1">痛点一：</strong><span data-i18n="research.photo.pain1">传统光声重建依赖理想物理假设（如均匀介质、点探测器），实际成像中存在声学衰减、非均匀传播、探测器响应不理想等问题，导致重建图像噪声大、采样伪影重、细节丢失严重。</span></p>
-        <p><strong data-i18n="research.label.pain2">痛点二：</strong><span data-i18n="research.photo.pain2">纯数据驱动的深度学习方法虽能从大量数据中学习映射关系，但缺乏物理约束，泛化性差，易产生非物理失真，在临床应用中存在可靠性风险。</span></p>
-        <p><strong data-i18n="research.label.solution">解决方案：</strong><span data-i18n="research.photo.solution">构建融合物理先验知识的深度学习框架，将光声成像的物理模型（波动方程、声传播算子、探测器模型）嵌入网络架构或损失函数中，实现低噪声、高物理保真的光声成像。</span></p>
-        <p><strong data-i18n="research.label.contribution">预期贡献：</strong><span data-i18n="research.photo.contribution">物理先验与深度学习的有机结合，有望突破现有光声成像的质量瓶颈，为光声显微成像在微血管网络、肿瘤微环境等生物医学应用中的定量分析提供可靠工具。</span></p>
-        <div class="project-tags">
-          <span class="badge badge-blue" data-i18n="research.badge.phd_plan">博士研究计划</span>
-          <span class="badge badge-blue" data-i18n="research.badge.photoacoustic">光声成像</span>
-          <span class="badge badge-blue" data-i18n="research.badge.physics_prior">物理先验约束</span>
-          <span class="badge badge-blue" data-i18n="research.badge.dl_denoising">深度学习去噪</span>
-        </div>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer class="footer">
   <div class="container">
-    <p data-i18n="footer.text">© 2026 李佳津. All rights reserved.</p>
+    <p data-i18n="footer.text">&copy; 2026 李佳津. All rights reserved.</p>
   </div>
 </footer>
 

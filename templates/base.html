@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}李佳津 - 个人主页{% endblock %}</title>
+  <meta name="description" content="{% block description %}李佳津的个人学术主页{% endblock %}">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="index.html" class="nav-brand" data-i18n="nav.brand">个人主页</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" data-i18n="nav.home">首页</a></li>
+      <li><a href="publications.html" data-i18n="nav.publications">论文</a></li>
+      <li><a href="research.html" data-i18n="nav.research">研究</a></li>
+      <li><a href="achievements.html" data-i18n="nav.achievements">成果</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="lang-toggle" id="lang-toggle">EN</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="container{% block main_class %}{% endblock %}">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p data-i18n="footer.text">&copy; 2026 李佳津. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

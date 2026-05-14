@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>后台管理 - 个人学术主页</title>
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #1e293b; }
+input, textarea, select, button { font-family: inherit; font-size: 13px; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: #2563eb !important; box-shadow: 0 0 0 2px rgba(37,99,235,0.15); }
+textarea { resize: vertical; }
+/* ===== Layout ===== */
+.app { display: flex; height: 100vh; overflow: hidden; }
+/* ===== Sidebar ===== */
+.sidebar { width: 200px; min-width: 200px; background: #1e293b; display: flex; flex-direction: column; color: #e2e8f0; transition: width 0.2s, min-width 0.2s; overflow: hidden; }
+.sidebar-brand { padding: 18px 16px; font-size: 15px; font-weight: 700; color: #fff; border-bottom: 1px solid #334155; white-space: nowrap; overflow: hidden; }
+.sidebar-nav { flex: 1; padding: 8px 0; overflow-y: auto; }
+.sidebar-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; cursor: pointer; color: #94a3b8; font-size: 13px; white-space: nowrap; transition: all 0.15s; user-select: none; }
+.sidebar-item:hover { background: #334155; color: #e2e8f0; }
+.sidebar-item.active { background: #334155; color: #fff; font-weight: 600; }
+.sidebar-item .icon { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
+.sidebar-item .label { overflow: hidden; text-overflow: ellipsis; }
+.sidebar-sep { height: 1px; background: #334155; margin: 6px 16px; }
+.sidebar-publish { margin: 8px 12px 16px; padding: 10px 12px; background: #2563eb; color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: background 0.15s; white-space: nowrap; }
+.sidebar-publish:hover { background: #1d4ed8; }
+/* ===== Main Content Area ===== */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+.main-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; border-bottom: 1px solid #e2e8f0; background: #fff; flex-shrink: 0; }
+.main-header h2 { font-size: 16px; font-weight: 600; color: #1e293b; }
+.main-header .count { font-size: 12px; color: #94a3b8; font-weight: 400; margin-left: 8px; }
+.main-header .actions { display: flex; gap: 8px; }
+.btn-add { padding: 7px 14px; background: #2563eb; color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: background 0.15s; }
+.btn-add:hover { background: #1d4ed8; }
+.main-body { flex: 1; overflow-y: auto; padding: 16px 24px; }
+/* ===== List Items ===== */
+.list-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; margin-bottom: 8px; cursor: pointer; transition: all 0.15s; display: flex; align-items: flex-start; gap: 12px; }
+.list-item:hover { border-color: #2563eb; box-shadow: 0 1px 4px rgba(37,99,235,0.1); }
+.list-item.active { border-color: #2563eb; background: #f0f7ff; }
+.list-item .item-main { flex: 1; min-width: 0; }
+.list-item .item-title { font-size: 13px; font-weight: 600; color: #1e293b; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.list-item .item-sub { font-size: 12px; color: #64748b; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.list-item .item-badges { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+.list-item .cat-badge { font-size: 10px; padding: 1px 7px; border-radius: 4px; font-weight: 500; }
+.cat-published { background: #dcfce7; color: #166534; }
+.cat-conference { background: #dbeafe; color: #1e40af; }
+.cat-revision { background: #fef9c3; color: #854d0e; }
+.cat-sperm { background: #fce7f3; color: #9d174d; }
+.cat-fpm { background: #dbeafe; color: #1e40af; }
+.cat-ultrasound { background: #e0f2fe; color: #075985; }
+.cat-photoacoustic { background: #ede9fe; color: #5b21b6; }
+/* ===== Edit Panel ===== */
+.edit-panel { width: 0; min-width: 0; background: #fff; border-left: 1px solid #e2e8f0; overflow: hidden; transition: width 0.25s ease, min-width 0.25s ease; display: flex; flex-direction: column; flex-shrink: 0; }
+.edit-panel.open { width: 360px; min-width: 360px; }
+.edit-panel-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #e2e8f0; flex-shrink: 0; }
+.edit-panel-header h3 { font-size: 14px; font-weight: 600; }
+.edit-panel-close { width: 28px; height: 28px; border: none; background: none; font-size: 18px; cursor: pointer; color: #94a3b8; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+.edit-panel-close:hover { background: #f1f5f9; color: #475569; }
+.edit-panel-body { flex: 1; overflow-y: auto; padding: 16px 20px; }
+.edit-panel-footer { display: flex; gap: 8px; padding: 12px 20px; border-top: 1px solid #e2e8f0; flex-shrink: 0; }
+.edit-panel-footer .btn { flex: 1; }
+/* ===== Form Elements ===== */
+.form-group { margin-bottom: 14px; }
+.form-label { display: block; font-size: 10px; font-weight: 600; color: #718096; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px; }
+.form-input, .form-textarea, .form-select { width: 100%; padding: 7px 10px; border: 1px solid #e2e8f0; border-radius: 6px; background: #fff; color: #1e293b; transition: border-color 0.15s; }
+.form-textarea { min-height: 60px; }
+.form-row { display: flex; gap: 8px; }
+.form-row > * { flex: 1; }
+.form-checkbox { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #475569; }
+.form-checkbox input { width: 16px; height: 16px; accent-color: #2563eb; }
+/* ===== Dynamic List Fields ===== */
+.dynamic-list { display: flex; flex-direction: column; gap: 6px; }
+.dynamic-item { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; position: relative; }
+.dynamic-item .dyn-remove { position: absolute; top: 6px; right: 6px; width: 20px; height: 20px; border: none; background: none; cursor: pointer; font-size: 14px; color: #94a3b8; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+.dynamic-item .dyn-remove:hover { background: #fee2e2; color: #ef4444; }
+.dynamic-item .dyn-fields { display: flex; flex-direction: column; gap: 6px; padding-right: 20px; }
+.dyn-add { margin-top: 4px; padding: 5px 10px; background: none; border: 1px dashed #cbd5e1; border-radius: 6px; font-size: 12px; color: #64748b; cursor: pointer; text-align: center; transition: all 0.15s; }
+.dyn-add:hover { border-color: #2563eb; color: #2563eb; }
+/* ===== Badges Dynamic List ===== */
+.badge-row { display: flex; gap: 6px; align-items: center; }
+.badge-row input { flex: 1; }
+.badge-row select { width: auto; min-width: 100px; }
+.badge-row .dyn-remove-badge { width: 24px; height: 24px; border: none; background: #fee2e2; color: #ef4444; border-radius: 4px; cursor: pointer; font-size: 14px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+/* ===== Buttons ===== */
+.btn { padding: 7px 14px; border: none; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
+.btn-primary { background: #2563eb; color: #fff; }
+.btn-primary:hover { background: #1d4ed8; }
+.btn-danger { background: #ef4444; color: #fff; }
+.btn-danger:hover { background: #dc2626; }
+.btn-outline { background: #fff; color: #475569; border: 1px solid #e2e8f0; }
+.btn-outline:hover { background: #f8fafc; border-color: #cbd5e1; }
+.btn-sm { padding: 4px 10px; font-size: 12px; }
+/* ===== Toast ===== */
+.toast { position: fixed; top: 16px; right: 16px; z-index: 9999; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 500; color: #fff; opacity: 0; transform: translateY(-10px); transition: all 0.25s; pointer-events: none; max-width: 360px; }
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast-success { background: #059669; }
+.toast-error { background: #dc2626; }
+/* ===== Modal ===== */
+.modal-overlay { position: fixed; inset: 0; background: rgba(15,23,42,0.5); z-index: 9998; display: none; align-items: center; justify-content: center; }
+.modal-overlay.show { display: flex; }
+.modal-box { background: #fff; border-radius: 12px; padding: 24px; width: 420px; max-width: 90vw; box-shadow: 0 20px 60px rgba(0,0,0,0.2); text-align: center; }
+.modal-box h3 { font-size: 16px; margin-bottom: 8px; }
+.modal-box p { font-size: 13px; color: #64748b; margin-bottom: 16px; }
+.modal-box .spinner { width: 36px; height: 36px; border: 3px solid #e2e8f0; border-top-color: #2563eb; border-radius: 50%; animation: spin 0.7s linear infinite; margin: 8px auto 16px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.modal-box .modal-output { background: #1e293b; color: #a5f3fc; font-size: 12px; font-family: 'Courier New', monospace; padding: 12px; border-radius: 6px; text-align: left; max-height: 180px; overflow-y: auto; margin-top: 12px; white-space: pre-wrap; word-break: break-all; }
+.modal-box .btn { margin-top: 12px; }
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .sidebar { width: 60px; min-width: 60px; }
+  .sidebar-brand, .sidebar-item .label, .sidebar-publish span { display: none; }
+  .sidebar-item { justify-content: center; padding: 12px 0; }
+  .sidebar-item .icon { width: auto; font-size: 18px; }
+  .sidebar-publish { padding: 8px; margin: 8px; justify-content: center; }
+  .sidebar-publish .icon-only { display: inline; }
+  .edit-panel.open { position: fixed; top: 0; right: 0; bottom: 0; width: 100% !important; min-width: 100% !important; z-index: 100; }
+}
+.sidebar-publish .icon-only { display: none; }
+@media (max-width: 1024px) {
+  .sidebar-publish .icon-only { display: inline; }
+  .sidebar-publish span { display: none; }
+}
+/* ===== Scrollbar ===== */
+.main-body::-webkit-scrollbar, .edit-panel-body::-webkit-scrollbar { width: 5px; }
+.main-body::-webkit-scrollbar-track { background: transparent; }
+.main-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+.edit-panel-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+/* ===== Misc ===== */
+.empty-state { text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 13px; }
+.section-desc { display: flex; flex-direction: column; gap: 4px; }
+.section-desc .item-title { color: #1e293b; font-weight: 600; font-size: 13px; }
+.section-desc .item-sub { color: #64748b; font-size: 11px; }
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">学术主页管理</div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-item active" data-section="home" onclick="switchSection('home')">
+        <span class="icon">🏠</span><span class="label">首页编辑</span>
+      </div>
+      <div class="sidebar-item" data-section="publications" onclick="switchSection('publications')">
+        <span class="icon">📄</span><span class="label">论文管理</span>
+      </div>
+      <div class="sidebar-item" data-section="research" onclick="switchSection('research')">
+        <span class="icon">🔬</span><span class="label">研究管理</span>
+      </div>
+      <div class="sidebar-item" data-section="achievements" onclick="switchSection('achievements')">
+        <span class="icon">🏆</span><span class="label">成果管理</span>
+      </div>
+      <div class="sidebar-sep"></div>
+    </nav>
+    <button class="sidebar-publish" onclick="openPublishModal()">
+      <span class="icon-only">🚀</span><span>🚀 发布网站</span>
+    </button>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main" id="mainArea">
+    <div class="main-header">
+      <div><h2 id="sectionTitle">首页编辑</h2><span class="count" id="itemCount"></span></div>
+      <div class="actions"><button class="btn-add" id="btnNew" onclick="newItem()" style="display:none">＋ 新增</button></div>
+    </div>
+    <div class="main-body" id="mainBody"></div>
+  </main>
+
+  <!-- Edit Panel -->
+  <aside class="edit-panel" id="editPanel">
+    <div class="edit-panel-header">
+      <h3 id="panelTitle">编辑</h3>
+      <button class="edit-panel-close" onclick="closeEditPanel()">✕</button>
+    </div>
+    <div class="edit-panel-body" id="editBody"></div>
+    <div class="edit-panel-footer" id="editFooter">
+      <button class="btn btn-primary" onclick="saveItem()">💾 保存</button>
+      <button class="btn btn-danger" id="btnDelete" onclick="deleteItem()">🗑 删除</button>
+    </div>
+  </aside>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Publish Modal -->
+<div class="modal-overlay" id="publishModal">
+  <div class="modal-box">
+    <div id="publishContent">
+      <h3>🚀 发布网站</h3>
+      <div class="spinner" id="pubSpinner"></div>
+      <p id="pubStatus">正在构建页面...</p>
+      <div class="modal-output" id="pubOutput" style="display:none"></div>
+      <button class="btn btn-primary" id="pubCloseBtn" style="display:none" onclick="closePublishModal()">完成</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== State =====
+var content = null;
+var currentSection = 'home';
+var editMode = 'edit'; // 'edit' | 'new'
+var editingIndex = -1;
+
+// ===== Initialization =====
+async function init() {
+  await loadContent();
+  renderSection('home');
+}
+
+async function loadContent() {
+  try {
+    var r = await fetch('/api/content');
+    content = await r.json();
+  } catch(e) {
+    showToast('加载数据失败: ' + e.message, 'error');
+  }
+}
+
+// ===== Section Switching =====
+function switchSection(section) {
+  currentSection = section;
+  document.querySelectorAll('.sidebar-item').forEach(function(el) {
+    el.classList.toggle('active', el.dataset.section === section);
+  });
+  closeEditPanel();
+  renderSection(section);
+}
+
+function renderSection(section) {
+  var body = document.getElementById('mainBody');
+  var title = document.getElementById('sectionTitle');
+  var count = document.getElementById('itemCount');
+  var btnNew = document.getElementById('btnNew');
+
+  if (section === 'home') {
+    title.textContent = '首页编辑';
+    count.textContent = '';
+    btnNew.style.display = 'none';
+    renderHome(body);
+  } else if (section === 'publications') {
+    title.textContent = '论文管理';
+    count.textContent = '(' + (content.publications ? content.publications.length : 0) + ')';
+    btnNew.style.display = 'inline-flex';
+    renderPublicationList(body);
+  } else if (section === 'research') {
+    title.textContent = '研究管理';
+    count.textContent = '(' + (content.research ? content.research.length : 0) + ')';
+    btnNew.style.display = 'inline-flex';
+    renderResearchList(body);
+  } else if (section === 'achievements') {
+    title.textContent = '成果管理';
+    count.textContent = '';
+    btnNew.style.display = 'none';
+    renderAchievements(body);
+  }
+}
+
+// ===== Home Render =====
+function renderHome(body) {
+  var h = content.home;
+  if (!h) { body.innerHTML = '<div class="empty-state">暂无数据</div>'; return; }
+  var items = [];
+  items.push({ title: '姓名 / 英文名', sub: h.name + ' / ' + (h.name_en || '') });
+  items.push({ title: '头衔', sub: h.title + ' / ' + (h.title_en || '') });
+  items.push({ title: '个人简介', sub: (h.intro || '').substring(0, 80) + '...' });
+  items.push({ title: '头像', sub: h.avatar || '' });
+  items.push({ title: '教育经历', sub: (h.education ? h.education.length : 0) + ' 条' });
+  items.push({ title: '研究方向标签', sub: (h.tags ? h.tags.length : 0) + ' 个' });
+  items.push({ title: '联系方式', sub: h.contact ? h.contact.email : '' });
+  items.push({ title: '基本信息', sub: h.basic ? h.basic.hometown : '' });
+  items.push({ title: '最新动态', sub: (h.news ? h.news.length : 0) + ' 条' });
+  items.push({ title: '统计数字', sub: (h.stats ? h.stats.length : 0) + ' 项' });
+  items.push({ title: '外部链接', sub: 'GitHub / ORCID / WoS / Scopus' });
+  body.innerHTML = items.map(function(item, i) {
+    return '<div class="list-item" onclick="editHome()"><div class="item-main"><div class="item-title">' + escHtml(item.title) + '</div><div class="item-sub">' + escHtml(item.sub) + '</div></div></div>';
+  }).join('');
+}
+
+// ===== Publication List =====
+function renderPublicationList(body) {
+  var pubs = content.publications || [];
+  if (!pubs.length) { body.innerHTML = '<div class="empty-state">暂无论文，点击右上角新增</div>'; return; }
+  var categories = { published: '已发表', conference: '会议论文', revision: '返修中' };
+  body.innerHTML = pubs.map(function(p, i) {
+    var catLabel = categories[p.category] || p.category;
+    var catClass = 'cat-' + (p.category || 'published');
+    var journal = p.journal || '';
+    return '<div class="list-item" onclick="editPublication(' + i + ')"><div class="item-main"><div class="item-title">' + escHtml(p.title) + '</div><div class="item-sub">' + escHtml(journal) + '</div><div class="item-badges"><span class="cat-badge ' + catClass + '">' + escHtml(catLabel) + '</span></div></div></div>';
+  }).join('');
+}
+
+// ===== Research List =====
+function renderResearchList(body) {
+  var res = content.research || [];
+  if (!res.length) { body.innerHTML = '<div class="empty-state">暂无研究项目</div>'; return; }
+  var sectionNames = { sperm: '精子分析', fpm: '傅里叶叠层显微', ultrasound: '超声重建', photoacoustic: '光声成像' };
+  body.innerHTML = res.map(function(r, i) {
+    var secLabel = sectionNames[r.section] || r.section;
+    var secClass = 'cat-' + (r.section || '');
+    return '<div class="list-item" onclick="editResearch(' + i + ')"><div class="item-main"><div class="item-title">' + escHtml(r.title) + '</div><div class="item-sub">' + escHtml(r.section_heading) + '</div><div class="item-badges"><span class="cat-badge ' + secClass + '">' + escHtml(secLabel) + '</span></div></div></div>';
+  }).join('');
+}
+
+// ===== Achievements =====
+function renderAchievements(body) {
+  var a = content.achievements;
+  if (!a) { body.innerHTML = '<div class="empty-state">暂无数据</div>'; return; }
+  var items = [];
+  items.push({ title: '竞赛金奖', sub: (a.competitions && a.competitions.gold ? a.competitions.gold.length : 0) + ' 项' });
+  items.push({ title: '竞赛银奖', sub: (a.competitions && a.competitions.silver ? a.competitions.silver.length : 0) + ' 项' });
+  items.push({ title: '其他竞赛获奖', sub: a.competitions && a.competitions.others ? (a.competitions.others.zh || '').substring(0, 50) + '...' : '' });
+  items.push({ title: '专利信息', sub: a.patent ? a.patent.title : '' });
+  items.push({ title: '软件著作权', sub: (a.software ? a.software.length : 0) + ' 项' });
+  items.push({ title: '会议信息', sub: a.conference ? (a.conference.description || '') : '' });
+  body.innerHTML = items.map(function(item) {
+    return '<div class="list-item" onclick="editAchievements()"><div class="item-main"><div class="item-title">' + escHtml(item.title) + '</div><div class="item-sub">' + escHtml(item.sub) + '</div></div></div>';
+  }).join('');
+}
+
+// ===== Edit Panel: Home =====
+function editHome() {
+  editMode = 'edit';
+  document.getElementById('panelTitle').textContent = '编辑首页';
+  openEditPanel();
+
+  var h = content.home;
+  var html = '';
+  // Name
+  html += '<div class="form-group"><label class="form-label">姓名 (中文)</label><input class="form-input" id="f_home_name" value="' + escAttr(h.name) + '"></div>';
+  html += '<div class="form-group"><label class="form-label">姓名 (英文)</label><input class="form-input" id="f_home_name_en" value="' + escAttr(h.name_en || '') + '"></div>';
+  // Title
+  html += '<div class="form-group"><label class="form-label">头衔 (中文)</label><input class="form-input" id="f_home_title" value="' + escAttr(h.title) + '"></div>';
+  html += '<div class="form-group"><label class="form-label">头衔 (英文)</label><input class="form-input" id="f_home_title_en" value="' + escAttr(h.title_en || '') + '"></div>';
+  // Intro
+  html += '<div class="form-group"><label class="form-label">个人简介 (中文)</label><textarea class="form-textarea" id="f_home_intro" rows="4">' + escHtml(h.intro || '') + '</textarea></div>';
+  html += '<div class="form-group"><label class="form-label">个人简介 (英文)</label><textarea class="form-textarea" id="f_home_intro_en" rows="4">' + escHtml(h.intro_en || '') + '</textarea></div>';
+  // Avatar
+  html += '<div class="form-group"><label class="form-label">头像路径</label><input class="form-input" id="f_home_avatar" value="' + escAttr(h.avatar || '') + '"></div>';
+  // Education
+  html += '<div class="form-group"><label class="form-label">教育经历</label><div class="dynamic-list" id="eduList">';
+  (h.education || []).forEach(function(e, i) {
+    html += renderEduItem(e, i);
+  });
+  html += '</div><button class="dyn-add" onclick="addEdu()">＋ 添加教育经历</button></div>';
+  // Tags
+  html += '<div class="form-group"><label class="form-label">研究方向标签（英文逗号分隔）</label><input class="form-input" id="f_home_tags" value="' + escAttr((h.tags || []).join(', ')) + '"></div>';
+  html += '<div class="form-group"><label class="form-label">研究方向标签 (英文)</label><input class="form-input" id="f_home_tags_en" value="' + escAttr((h.tags_en || []).join(', ')) + '"></div>';
+  // Contact
+  html += '<div class="form-group"><label class="form-label">邮箱</label><input class="form-input" id="f_home_email" value="' + escAttr(h.contact ? h.contact.email : '') + '"></div>';
+  html += '<div class="form-group"><label class="form-label">电话</label><input class="form-input" id="f_home_phone" value="' + escAttr(h.contact ? h.contact.phone : '') + '"></div>';
+  // Basic
+  html += '<div class="form-group"><label class="form-label">籍贯 (中文)</label><input class="form-input" id="f_home_hometown" value="' + escAttr(h.basic ? h.basic.hometown : '') + '"></div>';
+  html += '<div class="form-group"><label class="form-label">基本信息 (中文)</label><input class="form-input" id="f_home_age" value="' + escAttr(h.basic ? h.basic.age : '') + '"></div>';
+  html += '<div class="form-group"><label class="form-label">籍贯 (英文)</label><input class="form-input" id="f_home_hometown_en" value="' + escAttr(h.basic_en ? h.basic_en.hometown_en : '') + '"></div>';
+  html += '<div class="form-group"><label class="form-label">基本信息 (英文)</label><input class="form-input" id="f_home_age_en" value="' + escAttr(h.basic_en ? h.basic_en.age_en : '') + '"></div>';
+  // News
+  html += '<div class="form-group"><label class="form-label">最新动态 (中文)</label><div class="dynamic-list" id="newsList">';
+  (h.news || []).forEach(function(n, i) {
+    html += renderNewsItem(n, i);
+  });
+  html += '</div><button class="dyn-add" onclick="addNews()">＋ 添加动态</button></div>';
+  // News_en
+  html += '<div class="form-group"><label class="form-label">最新动态 (英文)</label><div class="dynamic-list" id="newsEnList">';
+  (h.news_en || []).forEach(function(n, i) {
+    html += renderNewsEnItem(n, i);
+  });
+  html += '</div><button class="dyn-add" onclick="addNewsEn()">＋ 添加英文动态</button></div>';
+  // Links
+  html += '<div class="form-group"><label class="form-label">GitHub URL</label><input class="form-input" id="f_home_gh" value="' + escAttr(h.links ? h.links.github : '') + '"></div>';
+  html += '<div class="form-group"><label class="form-label">ORCID URL</label><input class="form-input" id="f_home_orcid" value="' + escAttr(h.links ? h.links.orcid : '') + '"></div>';
+  html += '<div class="form-group"><label class="form-label">WoS URL</label><input class="form-input" id="f_home_wos" value="' + escAttr(h.links ? h.links.wos : '') + '"></div>';
+  html += '<div class="form-group"><label class="form-label">Scopus URL</label><input class="form-input" id="f_home_scopus" value="' + escAttr(h.links ? h.links.scopus : '') + '"></div>';
+  // Stats
+  html += '<div class="form-group"><label class="form-label">统计数字 (JSON 格式)</label><textarea class="form-textarea" id="f_home_stats" rows="3">' + escHtml(JSON.stringify(h.stats || [], null, 2)) + '</textarea></div>';
+
+  document.getElementById('editBody').innerHTML = html;
+  document.getElementById('btnDelete').style.display = 'none';
+}
+
+function renderEduItem(e, i) {
+  return '<div class="dynamic-item"><button class="dyn-remove" onclick="removeEdu(' + i + ')">✕</button><div class="dyn-fields">'
+    + '<input class="form-input" placeholder="日期" id="edu_date_' + i + '" value="' + escAttr(e.date || '') + '">'
+    + '<input class="form-input" placeholder="标题（中文）" id="edu_title_' + i + '" value="' + escAttr(e.title || '') + '">'
+    + '<input class="form-input" placeholder="描述（中文）" id="edu_desc_' + i + '" value="' + escAttr(e.desc || '') + '">'
+    + '<input class="form-input" placeholder="标题（英文）" id="edu_title_en_' + i + '" value="' + escAttr(e.title_en || '') + '">'
+    + '<input class="form-input" placeholder="描述（英文）" id="edu_desc_en_' + i + '" value="' + escAttr(e.desc_en || '') + '">'
+    + '<input class="form-input" placeholder="日期（英文）" id="edu_date_en_' + i + '" value="' + escAttr(e.date_en || '') + '">'
+    + '</div></div>';
+}
+
+function renderNewsItem(n, i) {
+  return '<div class="dynamic-item"><button class="dyn-remove" onclick="removeNews(' + i + ')">✕</button><div class="dyn-fields">'
+    + '<textarea class="form-textarea" rows="2" placeholder="中文动态" id="news_zh_' + i + '">' + escHtml(n.zh || '') + '</textarea>'
+    + '</div></div>';
+}
+
+function renderNewsEnItem(n, i) {
+  return '<div class="dynamic-item"><button class="dyn-remove" onclick="removeNewsEn(' + i + ')">✕</button><div class="dyn-fields">'
+    + '<textarea class="form-textarea" rows="2" placeholder="英文动态" id="newsen_' + i + '">' + escHtml(n || '') + '</textarea>'
+    + '</div></div>';
+}
+
+// ===== Edit Panel: Publications =====
+function editPublication(index) {
+  editMode = 'edit';
+  editingIndex = index;
+  document.getElementById('panelTitle').textContent = '编辑论文';
+  openEditPanel();
+  document.getElementById('btnDelete').style.display = 'inline-flex';
+
+  var p = content.publications[index];
+  var html = '';
+  html += '<div class="form-group"><label class="form-label">标题</label><textarea class="form-textarea" id="f_pub_title" rows="3">' + escHtml(p.title) + '</textarea></div>';
+  html += '<div class="form-group"><label class="form-label">作者</label><input class="form-input" id="f_pub_authors" value="' + escAttr(p.authors) + '"></div>';
+  html += '<div class="form-group"><label class="form-label">期刊</label><input class="form-input" id="f_pub_journal" value="' + escAttr(p.journal) + '"></div>';
+  html += '<div class="form-group"><label class="form-label">分类</label><select class="form-select" id="f_pub_category" onchange="toggleRevision()">'
+    + '<option value="published"' + (p.category === 'published' ? ' selected' : '') + '>已发表</option>'
+    + '<option value="conference"' + (p.category === 'conference' ? ' selected' : '') + '>会议论文</option>'
+    + '<option value="revision"' + (p.category === 'revision' ? ' selected' : '') + '>返修中</option>'
+    + '</select></div>';
+  html += '<div class="form-group"><label class="form-checkbox"><input type="checkbox" id="f_pub_revision"' + (p.revision ? ' checked' : '') + '> 返修中?</label></div>';
+  html += '<div class="form-group"><label class="form-label">链接 URL</label><input class="form-input" id="f_pub_link" value="' + escAttr(p.link || '') + '"></div>';
+  // Badges
+  html += '<div class="form-group"><label class="form-label">Badges</label><div id="pubBadges">';
+  (p.badges || []).forEach(function(b, i) {
+    html += renderBadgeRow('pub', b, i);
+  });
+  html += '</div><button class="dyn-add" onclick="addBadge(\'pub\')">＋ 添加 Badge</button></div>';
+
+  document.getElementById('editBody').innerHTML = html;
+  // Set revision checkbox visibility
+  toggleRevision();
+}
+
+function renderBadgeRow(prefix, b, i) {
+  var classes = ['badge-blue','badge-green','badge-gray','badge-yellow'];
+  var opts = classes.map(function(c) { return '<option value="' + c + '"' + (b.class === c ? ' selected' : '') + '>' + c + '</option>'; }).join('');
+  return '<div class="badge-row" style="margin-bottom:6px">'
+    + '<input class="form-input" placeholder="中文" id="' + prefix + '_badge_zh_' + i + '" value="' + escAttr(b.zh || '') + '" style="flex:1">'
+    + '<input class="form-input" placeholder="English" id="' + prefix + '_badge_en_' + i + '" value="' + escAttr(b.en || '') + '" style="flex:1">'
+    + '<select class="form-select" id="' + prefix + '_badge_class_' + i + '">' + opts + '</select>'
+    + '<button class="dyn-remove-badge" onclick="removeBadge(\'' + prefix + '\',' + i + ')">✕</button></div>';
+}
+
+// ===== Edit Panel: Research =====
+function editResearch(index) {
+  editMode = 'edit';
+  editingIndex = index;
+  document.getElementById('panelTitle').textContent = '编辑研究';
+  openEditPanel();
+  document.getElementById('btnDelete').style.display = 'inline-flex';
+
+  var r = content.research[index];
+  var html = '';
+  html += '<div class="form-group"><label class="form-label">标题</label><input class="form-input" id="f_res_title" value="' + escAttr(r.title) + '"></div>';
+  html += '<div class="form-group"><label class="form-label">所属领域</label><select class="form-select" id="f_res_section">'
+    + '<option value="sperm"' + (r.section === 'sperm' ? ' selected' : '') + '>精子分析 (sperm)</option>'
+    + '<option value="fpm"' + (r.section === 'fpm' ? ' selected' : '') + '>傅里叶叠层显微 (fpm)</option>'
+    + '<option value="ultrasound"' + (r.section === 'ultrasound' ? ' selected' : '') + '>超声重建 (ultrasound)</option>'
+    + '<option value="photoacoustic"' + (r.section === 'photoacoustic' ? ' selected' : '') + '>光声成像 (photoacoustic)</option>'
+    + '</select></div>';
+  html += '<div class="form-group"><label class="form-label">领域标题</label><input class="form-input" id="f_res_heading" value="' + escAttr(r.section_heading) + '"></div>';
+  html += '<div class="form-group"><label class="form-label">图片路径</label><input class="form-input" id="f_res_image" value="' + escAttr(r.image || '') + '"></div>';
+
+  // Paragraphs
+  html += '<div class="form-group"><label class="form-label">段落</label><div id="resParagraphs">';
+  (r.paragraphs || []).forEach(function(p, i) {
+    html += renderParagraphItem(p, i);
+  });
+  html += '</div><button class="dyn-add" onclick="addParagraph()">＋ 添加段落</button></div>';
+
+  // Badges
+  html += '<div class="form-group"><label class="form-label">Badges</label><div id="resBadges">';
+  (r.badges || []).forEach(function(b, i) {
+    html += renderBadgeRow('res', b, i);
+  });
+  html += '</div><button class="dyn-add" onclick="addBadge(\'res\')">＋ 添加 Badge</button></div>';
+
+  document.getElementById('editBody').innerHTML = html;
+}
+
+function renderParagraphItem(p, i) {
+  return '<div class="dynamic-item"><button class="dyn-remove" onclick="removeParagraph(' + i + ')">✕</button><div class="dyn-fields">'
+    + '<input class="form-input" placeholder="标签（如 背景：）" id="para_label_' + i + '" value="' + escAttr(p.label || '') + '">'
+    + '<textarea class="form-textarea" rows="2" placeholder="中文内容" id="para_zh_' + i + '">' + escHtml(p.zh || '') + '</textarea>'
+    + '<textarea class="form-textarea" rows="2" placeholder="英文内容" id="para_en_' + i + '">' + escHtml(p.en || '') + '</textarea>'
+    + '</div></div>';
+}
+
+// ===== Edit Panel: Achievements =====
+function editAchievements() {
+  editMode = 'edit';
+  document.getElementById('panelTitle').textContent = '编辑成果';
+  openEditPanel();
+  document.getElementById('btnDelete').style.display = 'none';
+
+  var a = content.achievements;
+  if (!a) { content.achievements = { competitions: { gold: [], silver: [], others: { zh: '' } }, patent: { count: '', title: '', number: '', inventors: '' }, software: [], conference: { description: '', report: '', report_title: '', extra: '' } }; a = content.achievements; }
+
+  var html = '';
+  // Gold competitions
+  html += '<div class="form-group"><label class="form-label">竞赛金奖</label><div class="dynamic-list" id="goldList">';
+  (a.competitions.gold || []).forEach(function(g, i) {
+    html += '<div class="dynamic-item"><button class="dyn-remove" onclick="removeGold(' + i + ')">✕</button><div class="dyn-fields"><textarea class="form-textarea" rows="2" placeholder="中文" id="gold_zh_' + i + '">' + escHtml(g.zh || '') + '</textarea><textarea class="form-textarea" rows="2" placeholder="英文" id="gold_en_' + i + '">' + escHtml(g.en || '') + '</textarea></div></div>';
+  });
+  html += '</div><button class="dyn-add" onclick="addGold()">＋ 添加金奖</button></div>';
+
+  // Silver competitions
+  html += '<div class="form-group"><label class="form-label">竞赛银奖</label><div class="dynamic-list" id="silverList">';
+  (a.competitions.silver || []).forEach(function(g, i) {
+    html += '<div class="dynamic-item"><button class="dyn-remove" onclick="removeSilver(' + i + ')">✕</button><div class="dyn-fields"><textarea class="form-textarea" rows="2" placeholder="中文" id="silver_zh_' + i + '">' + escHtml(g.zh || '') + '</textarea><textarea class="form-textarea" rows="2" placeholder="英文" id="silver_en_' + i + '">' + escHtml(g.en || '') + '</textarea></div></div>';
+  });
+  html += '</div><button class="dyn-add" onclick="addSilver()">＋ 添加银奖</button></div>';
+
+  // Others
+  html += '<div class="form-group"><label class="form-label">其他竞赛获奖 (中文)</label><textarea class="form-textarea" rows="2" id="f_ach_others_zh">' + escHtml((a.competitions.others && a.competitions.others.zh) || '') + '</textarea></div>';
+  html += '<div class="form-group"><label class="form-label">其他竞赛获奖 (英文)</label><textarea class="form-textarea" rows="2" id="f_ach_others_en">' + escHtml((a.competitions.others && a.competitions.others.en) || '') + '</textarea></div>';
+
+  // Patent
+  html += '<div class="form-group" style="border-top:1px solid #e2e8f0;padding-top:12px"><label class="form-label" style="font-size:12px;color:#1e293b">专利信息</label></div>';
+  html += '<div class="form-group"><label class="form-label">专利数量文本</label><input class="form-input" id="f_ach_patent_count" value="' + escAttr(a.patent.count || '') + '"></div>';
+  html += '<div class="form-group"><label class="form-label">专利名称</label><input class="form-input" id="f_ach_patent_title" value="' + escAttr(a.patent.title || '') + '"></div>';
+  html += '<div class="form-group"><label class="form-label">专利号</label><input class="form-input" id="f_ach_patent_number" value="' + escAttr(a.patent.number || '') + '"></div>';
+  html += '<div class="form-group"><label class="form-label">发明人</label><input class="form-input" id="f_ach_patent_inventors" value="' + escAttr(a.patent.inventors || '') + '"></div>';
+
+  // Software
+  html += '<div class="form-group" style="border-top:1px solid #e2e8f0;padding-top:12px"><label class="form-label" style="font-size:12px;color:#1e293b">软件著作权</label></div>';
+  html += '<div class="form-group"><div class="dynamic-list" id="softList">';
+  (a.software || []).forEach(function(s, i) {
+    html += '<div class="dynamic-item"><button class="dyn-remove" onclick="removeSoft(' + i + ')">✕</button><div class="dyn-fields">'
+      + '<input class="form-input" placeholder="名称（中文）" id="soft_zh_' + i + '" value="' + escAttr(s.zh || '') + '">'
+      + '<input class="form-input" placeholder="名称（英文）" id="soft_en_' + i + '" value="' + escAttr(s.en || '') + '">'
+      + '<input class="form-input" placeholder="登记号" id="soft_number_' + i + '" value="' + escAttr(s.number || '') + '">'
+      + '</div></div>';
+  });
+  html += '</div><button class="dyn-add" onclick="addSoft()">＋ 添加软件著作权</button></div>';
+
+  // Conference
+  html += '<div class="form-group" style="border-top:1px solid #e2e8f0;padding-top:12px"><label class="form-label" style="font-size:12px;color:#1e293b">会议信息</label></div>';
+  html += '<div class="form-group"><label class="form-label">会议描述</label><input class="form-input" id="f_ach_conf_desc" value="' + escAttr(a.conference.description || '') + '"></div>';
+  html += '<div class="form-group"><label class="form-label">会议报告</label><input class="form-input" id="f_ach_conf_report" value="' + escAttr(a.conference.report || '') + '"></div>';
+  html += '<div class="form-group"><label class="form-label">报告标题</label><input class="form-input" id="f_ach_conf_report_title" value="' + escAttr(a.conference.report_title || '') + '"></div>';
+  html += '<div class="form-group"><label class="form-label">额外信息</label><textarea class="form-textarea" rows="2" id="f_ach_conf_extra">' + escHtml(a.conference.extra || '') + '</textarea></div>';
+
+  document.getElementById('editBody').innerHTML = html;
+}
+
+// ===== Edit Panel Open/Close =====
+function openEditPanel() {
+  document.getElementById('editPanel').classList.add('open');
+}
+
+function closeEditPanel() {
+  document.getElementById('editPanel').classList.remove('open');
+}
+
+// ===== New Item =====
+function newItem() {
+  if (currentSection === 'publications') {
+    editMode = 'new';
+    editingIndex = -1;
+    document.getElementById('panelTitle').textContent = '新增论文';
+    openEditPanel();
+    document.getElementById('btnDelete').style.display = 'none';
+    var html = '';
+    html += '<div class="form-group"><label class="form-label">标题</label><textarea class="form-textarea" id="f_pub_title" rows="3"></textarea></div>';
+    html += '<div class="form-group"><label class="form-label">作者</label><input class="form-input" id="f_pub_authors"></div>';
+    html += '<div class="form-group"><label class="form-label">期刊</label><input class="form-input" id="f_pub_journal"></div>';
+    html += '<div class="form-group"><label class="form-label">分类</label><select class="form-select" id="f_pub_category" onchange="toggleRevision()">'
+      + '<option value="published">已发表</option><option value="conference">会议论文</option><option value="revision">返修中</option></select></div>';
+    html += '<div class="form-group"><label class="form-checkbox"><input type="checkbox" id="f_pub_revision"> 返修中?</label></div>';
+    html += '<div class="form-group"><label class="form-label">链接 URL</label><input class="form-input" id="f_pub_link"></div>';
+    html += '<div class="form-group"><label class="form-label">Badges</label><div id="pubBadges"></div><button class="dyn-add" onclick="addBadge(\'pub\')">＋ 添加 Badge</button></div>';
+    document.getElementById('editBody').innerHTML = html;
+    toggleRevision();
+  } else if (currentSection === 'research') {
+    editMode = 'new';
+    editingIndex = -1;
+    document.getElementById('panelTitle').textContent = '新增研究';
+    openEditPanel();
+    document.getElementById('btnDelete').style.display = 'none';
+    var html = '';
+    html += '<div class="form-group"><label class="form-label">标题</label><input class="form-input" id="f_res_title"></div>';
+    html += '<div class="form-group"><label class="form-label">所属领域</label><select class="form-select" id="f_res_section">'
+      + '<option value="sperm">精子分析 (sperm)</option><option value="fpm">傅里叶叠层显微 (fpm)</option>'
+      + '<option value="ultrasound">超声重建 (ultrasound)</option><option value="photoacoustic">光声成像 (photoacoustic)</option></select></div>';
+    html += '<div class="form-group"><label class="form-label">领域标题</label><input class="form-input" id="f_res_heading"></div>';
+    html += '<div class="form-group"><label class="form-label">图片路径</label><input class="form-input" id="f_res_image"></div>';
+    html += '<div class="form-group"><label class="form-label">段落</label><div id="resParagraphs"></div><button class="dyn-add" onclick="addParagraph()">＋ 添加段落</button></div>';
+    html += '<div class="form-group"><label class="form-label">Badges</label><div id="resBadges"></div><button class="dyn-add" onclick="addBadge(\'res\')">＋ 添加 Badge</button></div>';
+    document.getElementById('editBody').innerHTML = html;
+  }
+}
+
+// ===== Dynamic Helpers: Badges =====
+var badgeCounters = { pub: 0, res: 0 };
+
+function addBadge(prefix) {
+  var container = document.getElementById(prefix + 'Badges');
+  var i = badgeCounters[prefix] ? badgeCounters[prefix] + 1 : (container.children.length || 0);
+  badgeCounters[prefix] = i;
+  var classes = ['badge-blue','badge-green','badge-gray','badge-yellow'];
+  var opts = classes.map(function(c) { return '<option value="' + c + '">' + c + '</option>'; }).join('');
+  var div = document.createElement('div');
+  div.className = 'badge-row';
+  div.style.marginBottom = '6px';
+  div.innerHTML = '<input class="form-input" placeholder="中文" id="' + prefix + '_badge_zh_' + i + '" style="flex:1">'
+    + '<input class="form-input" placeholder="English" id="' + prefix + '_badge_en_' + i + '" style="flex:1">'
+    + '<select class="form-select" id="' + prefix + '_badge_class_' + i + '">' + opts + '</select>'
+    + '<button class="dyn-remove-badge" onclick="this.parentElement.remove()">✕</button>';
+  container.appendChild(div);
+}
+
+function removeBadge(prefix, index) {
+  var container = document.getElementById(prefix + 'Badges');
+  var rows = container.querySelectorAll('.badge-row');
+  if (rows[index]) rows[index].remove();
+}
+
+function collectBadges(prefix) {
+  var container = document.getElementById(prefix + 'Badges');
+  var badges = [];
+  var rows = container.querySelectorAll('.badge-row');
+  rows.forEach(function(row) {
+    var zhInput = row.querySelector('input[id^="' + prefix + '_badge_zh_"]');
+    var enInput = row.querySelector('input[id^="' + prefix + '_badge_en_"]');
+    var clsSelect = row.querySelector('select[id^="' + prefix + '_badge_class_"]');
+    if (zhInput || enInput) {
+      badges.push({ class: clsSelect ? clsSelect.value : 'badge-blue', zh: zhInput ? zhInput.value : '', en: enInput ? enInput.value : '' });
+    }
+  });
+  return badges;
+}
+
+// ===== Dynamic Helpers: Paragraphs =====
+var paraCounter = 0;
+
+function addParagraph() {
+  var container = document.getElementById('resParagraphs');
+  var i = paraCounter++;
+  var div = document.createElement('div');
+  div.className = 'dynamic-item';
+  div.innerHTML = '<button class="dyn-remove" onclick="this.parentElement.remove()">✕</button><div class="dyn-fields">'
+    + '<input class="form-input" placeholder="标签（如 背景：）" id="para_label_' + i + '">'
+    + '<textarea class="form-textarea" rows="2" placeholder="中文内容" id="para_zh_' + i + '"></textarea>'
+    + '<textarea class="form-textarea" rows="2" placeholder="英文内容" id="para_en_' + i + '"></textarea></div>';
+  container.appendChild(div);
+}
+
+function removeParagraph(index) {
+  var container = document.getElementById('resParagraphs');
+  var items = container.querySelectorAll('.dynamic-item');
+  if (items[index]) items[index].remove();
+}
+
+function collectParagraphs() {
+  var container = document.getElementById('resParagraphs');
+  var items = container.querySelectorAll('.dynamic-item');
+  var paragraphs = [];
+  items.forEach(function(item) {
+    var inputs = item.querySelectorAll('input[id^="para_label_"], textarea[id^="para_zh_"], textarea[id^="para_en_"]');
+    if (inputs.length >= 3) {
+      paragraphs.push({ label: inputs[0].value, zh: inputs[1].value, en: inputs[2].value });
+    }
+  });
+  return paragraphs;
+}
+
+// ===== Dynamic Helpers: Education =====
+var eduCounter = 0;
+
+function addEdu() {
+  var container = document.getElementById('eduList');
+  var i = eduCounter++;
+  var div = document.createElement('div');
+  div.className = 'dynamic-item';
+  div.innerHTML = '<button class="dyn-remove" onclick="this.parentElement.remove()">✕</button><div class="dyn-fields">'
+    + '<input class="form-input" placeholder="日期" id="edu_date_' + i + '">'
+    + '<input class="form-input" placeholder="标题（中文）" id="edu_title_' + i + '">'
+    + '<input class="form-input" placeholder="描述（中文）" id="edu_desc_' + i + '">'
+    + '<input class="form-input" placeholder="标题（英文）" id="edu_title_en_' + i + '">'
+    + '<input class="form-input" placeholder="描述（英文）" id="edu_desc_en_' + i + '">'
+    + '<input class="form-input" placeholder="日期（英文）" id="edu_date_en_' + i + '"></div>';
+  container.appendChild(div);
+}
+
+function removeEdu(index) {
+  var container = document.getElementById('eduList');
+  var items = container.querySelectorAll('.dynamic-item');
+  if (items[index]) items[index].remove();
+}
+
+function collectEducation() {
+  var container = document.getElementById('eduList');
+  var items = container.querySelectorAll('.dynamic-item');
+  var edu = [];
+  items.forEach(function(item) {
+    var inputs = item.querySelectorAll('input');
+    var vals = [];
+    inputs.forEach(function(inp) { vals.push(inp.value); });
+    if (vals.length >= 6) {
+      edu.push({ date: vals[0], title: vals[1], desc: vals[2], title_en: vals[3], desc_en: vals[4], date_en: vals[5] });
+    }
+  });
+  return edu;
+}
+
+// ===== Dynamic Helpers: News =====
+var newsCounter = 0;
+
+function addNews() {
+  var container = document.getElementById('newsList');
+  var i = newsCounter++;
+  var div = document.createElement('div');
+  div.className = 'dynamic-item';
+  div.innerHTML = '<button class="dyn-remove" onclick="this.parentElement.remove()">✕</button><div class="dyn-fields">'
+    + '<textarea class="form-textarea" rows="2" placeholder="中文动态" id="news_zh_' + i + '"></textarea></div>';
+  container.appendChild(div);
+}
+
+function removeNews(index) {
+  var container = document.getElementById('newsList');
+  var items = container.querySelectorAll('.dynamic-item');
+  if (items[index]) items[index].remove();
+}
+
+function collectNews() {
+  var container = document.getElementById('newsList');
+  var items = container.querySelectorAll('.dynamic-item');
+  var news = [];
+  items.forEach(function(item) {
+    var ta = item.querySelector('textarea');
+    if (ta && ta.value.trim()) { news.push({ zh: ta.value }); }
+  });
+  return news;
+}
+
+var newsEnCounter = 0;
+
+function addNewsEn() {
+  var container = document.getElementById('newsEnList');
+  var i = newsEnCounter++;
+  var div = document.createElement('div');
+  div.className = 'dynamic-item';
+  div.innerHTML = '<button class="dyn-remove" onclick="this.parentElement.remove()">✕</button><div class="dyn-fields">'
+    + '<textarea class="form-textarea" rows="2" placeholder="英文动态" id="newsen_' + i + '"></textarea></div>';
+  container.appendChild(div);
+}
+
+function removeNewsEn(index) {
+  var container = document.getElementById('newsEnList');
+  var items = container.querySelectorAll('.dynamic-item');
+  if (items[index]) items[index].remove();
+}
+
+function collectNewsEn() {
+  var container = document.getElementById('newsEnList');
+  var items = container.querySelectorAll('.dynamic-item');
+  var news = [];
+  items.forEach(function(item) {
+    var ta = item.querySelector('textarea');
+    if (ta && ta.value.trim()) { news.push(ta.value); }
+  });
+  return news;
+}
+
+// ===== Dynamic Helpers: Achievements =====
+var goldCounter = 0;
+function addGold() {
+  var container = document.getElementById('goldList');
+  var i = goldCounter++;
+  var div = document.createElement('div');
+  div.className = 'dynamic-item';
+  div.innerHTML = '<button class="dyn-remove" onclick="this.parentElement.remove()">✕</button><div class="dyn-fields">'
+    + '<textarea class="form-textarea" rows="2" placeholder="中文" id="gold_zh_' + i + '"></textarea>'
+    + '<textarea class="form-textarea" rows="2" placeholder="英文" id="gold_en_' + i + '"></textarea></div>';
+  container.appendChild(div);
+}
+function removeGold(index) {
+  var container = document.getElementById('goldList');
+  var items = container.querySelectorAll('.dynamic-item');
+  if (items[index]) items[index].remove();
+}
+function collectGold() {
+  var container = document.getElementById('goldList');
+  var items = container.querySelectorAll('.dynamic-item');
+  var list = [];
+  items.forEach(function(item) {
+    var tas = item.querySelectorAll('textarea');
+    if (tas.length >= 2) list.push({ zh: tas[0].value, en: tas[1].value });
+  });
+  return list;
+}
+
+var silverCounter = 0;
+function addSilver() {
+  var container = document.getElementById('silverList');
+  var i = silverCounter++;
+  var div = document.createElement('div');
+  div.className = 'dynamic-item';
+  div.innerHTML = '<button class="dyn-remove" onclick="this.parentElement.remove()">✕</button><div class="dyn-fields">'
+    + '<textarea class="form-textarea" rows="2" placeholder="中文" id="silver_zh_' + i + '"></textarea>'
+    + '<textarea class="form-textarea" rows="2" placeholder="英文" id="silver_en_' + i + '"></textarea></div>';
+  container.appendChild(div);
+}
+function removeSilver(index) {
+  var container = document.getElementById('silverList');
+  var items = container.querySelectorAll('.dynamic-item');
+  if (items[index]) items[index].remove();
+}
+function collectSilver() {
+  var container = document.getElementById('silverList');
+  var items = container.querySelectorAll('.dynamic-item');
+  var list = [];
+  items.forEach(function(item) {
+    var tas = item.querySelectorAll('textarea');
+    if (tas.length >= 2) list.push({ zh: tas[0].value, en: tas[1].value });
+  });
+  return list;
+}
+
+var softCounter = 0;
+function addSoft() {
+  var container = document.getElementById('softList');
+  var i = softCounter++;
+  var div = document.createElement('div');
+  div.className = 'dynamic-item';
+  div.innerHTML = '<button class="dyn-remove" onclick="this.parentElement.remove()">✕</button><div class="dyn-fields">'
+    + '<input class="form-input" placeholder="名称（中文）" id="soft_zh_' + i + '">'
+    + '<input class="form-input" placeholder="名称（英文）" id="soft_en_' + i + '">'
+    + '<input class="form-input" placeholder="登记号" id="soft_number_' + i + '"></div>';
+  container.appendChild(div);
+}
+function removeSoft(index) {
+  var container = document.getElementById('softList');
+  var items = container.querySelectorAll('.dynamic-item');
+  if (items[index]) items[index].remove();
+}
+function collectSoft() {
+  var container = document.getElementById('softList');
+  var items = container.querySelectorAll('.dynamic-item');
+  var list = [];
+  items.forEach(function(item) {
+    var inputs = item.querySelectorAll('input');
+    if (inputs.length >= 3) list.push({ zh: inputs[0].value, en: inputs[1].value, number: inputs[2].value });
+  });
+  return list;
+}
+
+// ===== Save Logic =====
+function saveItem() {
+  var data = null;
+  try {
+    if (currentSection === 'home') {
+      data = collectHomeData();
+    } else if (currentSection === 'publications') {
+      data = collectPublicationData();
+    } else if (currentSection === 'research') {
+      data = collectResearchData();
+    } else if (currentSection === 'achievements') {
+      data = collectAchievementData();
+    }
+  } catch(e) {
+    showToast('数据收集错误: ' + e.message, 'error');
+    return;
+  }
+
+  // Apply data
+  try {
+    if (currentSection === 'home') {
+      content.home = data;
+    } else if (currentSection === 'publications') {
+      var pubs = content.publications || [];
+      if (editMode === 'new') {
+        pubs.push(data);
+      } else if (editingIndex >= 0) {
+        pubs[editingIndex] = data;
+      }
+      content.publications = pubs;
+    } else if (currentSection === 'research') {
+      var res = content.research || [];
+      if (editMode === 'new') {
+        res.push(data);
+      } else if (editingIndex >= 0) {
+        res[editingIndex] = data;
+      }
+      content.research = res;
+    } else if (currentSection === 'achievements') {
+      content.achievements = data;
+    }
+  } catch(e) {
+    showToast('数据处理错误: ' + e.message, 'error');
+    return;
+  }
+
+  saveContent();
+}
+
+function collectHomeData() {
+  var h = content.home || {};
+  var name = document.getElementById('f_home_name').value.trim();
+  if (!name) { throw new Error('姓名不能为空'); }
+  return {
+    name: name,
+    name_en: document.getElementById('f_home_name_en').value,
+    title: document.getElementById('f_home_title').value,
+    title_en: document.getElementById('f_home_title_en').value,
+    intro: document.getElementById('f_home_intro').value,
+    intro_en: document.getElementById('f_home_intro_en').value,
+    avatar: document.getElementById('f_home_avatar').value,
+    education: collectEducation(),
+    tags: (document.getElementById('f_home_tags').value || '').split(',').map(function(s) { return s.trim(); }).filter(Boolean),
+    tags_en: (document.getElementById('f_home_tags_en').value || '').split(',').map(function(s) { return s.trim(); }).filter(Boolean),
+    contact: {
+      email: document.getElementById('f_home_email').value,
+      phone: document.getElementById('f_home_phone').value
+    },
+    basic: {
+      hometown: document.getElementById('f_home_hometown').value,
+      age: document.getElementById('f_home_age').value
+    },
+    basic_en: {
+      hometown_en: document.getElementById('f_home_hometown_en').value,
+      age_en: document.getElementById('f_home_age_en').value
+    },
+    news: collectNews(),
+    news_en: collectNewsEn(),
+    links: {
+      github: document.getElementById('f_home_gh').value,
+      orcid: document.getElementById('f_home_orcid').value,
+      wos: document.getElementById('f_home_wos').value,
+      scopus: document.getElementById('f_home_scopus').value
+    },
+    stats: (function() {
+      try { return JSON.parse(document.getElementById('f_home_stats').value || '[]'); } catch(e) { return h.stats || []; }
+    })()
+  };
+}
+
+function collectPublicationData() {
+  var title = document.getElementById('f_pub_title').value.trim();
+  if (!title) throw new Error('标题不能为空');
+  return {
+    title: title,
+    authors: document.getElementById('f_pub_authors').value,
+    journal: document.getElementById('f_pub_journal').value,
+    category: document.getElementById('f_pub_category').value,
+    revision: document.getElementById('f_pub_revision').checked,
+    link: document.getElementById('f_pub_link').value || null,
+    badges: collectBadges('pub')
+  };
+}
+
+function collectResearchData() {
+  var title = document.getElementById('f_res_title').value.trim();
+  if (!title) throw new Error('标题不能为空');
+  return {
+    title: title,
+    section: document.getElementById('f_res_section').value,
+    section_heading: document.getElementById('f_res_heading').value,
+    image: document.getElementById('f_res_image').value || null,
+    paragraphs: collectParagraphs(),
+    badges: collectBadges('res')
+  };
+}
+
+function collectAchievementData() {
+  return {
+    competitions: {
+      gold: collectGold(),
+      silver: collectSilver(),
+      others: {
+        zh: document.getElementById('f_ach_others_zh').value,
+        en: document.getElementById('f_ach_others_en').value
+      }
+    },
+    patent: {
+      count: document.getElementById('f_ach_patent_count').value,
+      title: document.getElementById('f_ach_patent_title').value,
+      number: document.getElementById('f_ach_patent_number').value,
+      inventors: document.getElementById('f_ach_patent_inventors').value
+    },
+    software: collectSoft(),
+    conference: {
+      description: document.getElementById('f_ach_conf_desc').value,
+      report: document.getElementById('f_ach_conf_report').value,
+      report_title: document.getElementById('f_ach_conf_report_title').value,
+      extra: document.getElementById('f_ach_conf_extra').value
+    }
+  };
+}
+
+async function saveContent() {
+  try {
+    var r = await fetch('/api/content', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(content)
+    });
+    var result = await r.json();
+    if (result.status === 'ok') {
+      showToast('保存成功', 'success');
+      renderSection(currentSection);
+    } else {
+      showToast('保存失败: ' + (result.message || '未知错误'), 'error');
+    }
+  } catch(e) {
+    showToast('保存失败: ' + e.message, 'error');
+  }
+}
+
+// ===== Delete Logic =====
+function deleteItem() {
+  if (!confirm('确定要删除吗？此操作不可撤销。')) return;
+  if (currentSection === 'publications' && editingIndex >= 0) {
+    content.publications.splice(editingIndex, 1);
+  } else if (currentSection === 'research' && editingIndex >= 0) {
+    content.research.splice(editingIndex, 1);
+  }
+  closeEditPanel();
+  saveContent();
+}
+
+// ===== Toggle Revision =====
+function toggleRevision() {
+  var cat = document.getElementById('f_pub_category');
+  var rev = document.getElementById('f_pub_revision');
+  if (cat) rev.style.display = cat.value === 'revision' ? 'flex' : 'none';
+}
+
+// ===== Publish Flow =====
+function openPublishModal() {
+  document.getElementById('publishModal').classList.add('show');
+  document.getElementById('pubSpinner').style.display = 'block';
+  document.getElementById('pubStatus').textContent = '正在构建页面...';
+  document.getElementById('pubOutput').style.display = 'none';
+  document.getElementById('pubOutput').textContent = '';
+  document.getElementById('pubCloseBtn').style.display = 'none';
+  runPublish();
+}
+
+function closePublishModal() {
+  document.getElementById('publishModal').classList.remove('show');
+}
+
+async function runPublish() {
+  // Step 1: Build
+  try {
+    var r = await fetch('/api/build', { method: 'POST' });
+    var result = await r.json();
+    if (result.status !== 'ok') {
+      document.getElementById('pubStatus').textContent = '构建失败: ' + (result.message || '');
+      document.getElementById('pubSpinner').style.display = 'none';
+      document.getElementById('pubCloseBtn').style.display = 'inline-flex';
+      document.getElementById('pubCloseBtn').textContent = '关闭';
+      return;
+    }
+  } catch(e) {
+    document.getElementById('pubStatus').textContent = '构建失败: ' + e.message;
+    document.getElementById('pubSpinner').style.display = 'none';
+    document.getElementById('pubCloseBtn').style.display = 'inline-flex';
+    return;
+  }
+
+  // Step 2: Publish
+  document.getElementById('pubStatus').textContent = '正在推送到 GitHub...';
+  try {
+    var r2 = await fetch('/api/publish', { method: 'POST' });
+    var result2 = await r2.json();
+    document.getElementById('pubSpinner').style.display = 'none';
+    if (result2.status === 'ok') {
+      document.getElementById('pubStatus').textContent = '发布成功！';
+      if (result2.output) {
+        document.getElementById('pubOutput').textContent = result2.output;
+        document.getElementById('pubOutput').style.display = 'block';
+      }
+    } else {
+      document.getElementById('pubStatus').textContent = '推送失败: ' + (result2.message || '');
+      if (result2.output) {
+        document.getElementById('pubOutput').textContent = result2.output;
+        document.getElementById('pubOutput').style.display = 'block';
+      }
+    }
+  } catch(e) {
+    document.getElementById('pubStatus').textContent = '推送失败: ' + e.message;
+    document.getElementById('pubSpinner').style.display = 'none';
+  }
+  document.getElementById('pubCloseBtn').style.display = 'inline-flex';
+}
+
+// ===== Toast =====
+function showToast(message, type) {
+  var toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = 'toast toast-' + (type || 'success') + ' show';
+  setTimeout(function() {
+    toast.classList.remove('show');
+  }, 3000);
+}
+
+// ===== Utilities =====
+function escHtml(s) {
+  if (typeof s !== 'string') return s || '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escAttr(s) {
+  if (typeof s !== 'string') return s || '';
+  return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ===== Init =====
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}研究项目 - 李佳津个人主页{% endblock %}
+{% block description %}研究项目 — 李佳津，深度学习在医学图像处理中的应用，包括精子分析、FPM成像、超声重建、光声成像{% endblock %}
+
+{% block main_class %} main-content{% endblock %}
+
+{% block content %}
+<h2 class="section-title" data-i18n="research.title">研究项目</h2>
+<p class="section-subtitle" data-i18n="research.subtitle">深度学习在医学图像处理中的应用</p>
+
+{% set research_by_section = content.research|groupby('section') %}
+{% set nav_labels = {'sperm': '精子分析', 'fpm': 'FPM成像', 'ultrasound': '超声重建', 'photoacoustic': '光声成像'} %}
+
+<!-- Anchor navigation pills - grouped by research area -->
+<div class="research-nav">
+  {% for section, items in research_by_section %}
+  <button class="research-nav-item{% if loop.first %} active{% endif %}" data-scroll="project-{{ section }}" data-i18n="research.nav.{{ section }}">{{ nav_labels[section] if section in nav_labels else section }}</button>
+  {% endfor %}
+</div>
+
+{% for section, items in research_by_section %}
+{% set first_item = items|first %}
+<section id="project-{{ section }}">
+  <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-dark);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--accent);">{{ first_item.section_heading }}</h3>
+
+  {% for item in items %}
+  <div class="research-project">
+    {% if item.image %}
+    <img src="{{ item.image }}" alt="{{ item.title }}" class="project-banner" loading="lazy">
+    {% endif %}
+    <div class="project-body">
+      <h3>{{ item.title }}</h3>
+      {% for para in item.paragraphs %}
+      <p><strong>{{ para.label }}</strong><span>{{ para.zh }}</span></p>
+      {% endfor %}
+      <div class="project-tags">
+        {% for badge in item.badges %}
+        <span class="badge {{ badge.class }}">{{ badge.zh }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endfor %}
+{% endblock %}
