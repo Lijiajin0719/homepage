@@ -378,6 +378,18 @@ function applyTranslations() {
     }
   });
 
+  // Apply dynamic bilingual content (data-zh / data-en attributes)
+  const dynamicElements = document.querySelectorAll('[data-i18n-dynamic]');
+  dynamicElements.forEach(function (el) {
+    if (lang === 'en') {
+      const enVal = el.getAttribute('data-en');
+      if (enVal !== null) el.textContent = enVal;
+    } else {
+      const zhVal = el.getAttribute('data-zh');
+      if (zhVal !== null) el.textContent = zhVal;
+    }
+  });
+
   // Apply placeholder translations
   const placeholderElements = document.querySelectorAll(
     '[data-i18n-placeholder]'

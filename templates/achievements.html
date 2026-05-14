@@ -14,11 +14,11 @@
     <div class="achieve-icon" aria-hidden="true">🏆</div>
     <h3 data-i18n="achieve.competition">学科竞赛</h3>
     <div class="detail">
-      <p><span class="highlight-gold">国赛一等奖 ×{{ content.achievements.competitions.gold|length }}</span></p>
+      <p><span class="highlight-gold" data-i18n-dynamic data-zh="国赛一等奖 ×{{ content.achievements.competitions.gold|length }}" data-en="National First Prize ×{{ content.achievements.competitions.gold|length }}">国赛一等奖 ×{{ content.achievements.competitions.gold|length }}</span></p>
       {% for item in content.achievements.competitions.gold %}
       <p>{{ item.zh }}</p>
       {% endfor %}
-      <p style="margin-top:8px;"><span class="highlight">国赛二等奖 ×{{ content.achievements.competitions.silver|length }}</span></p>
+      <p style="margin-top:8px;"><span class="highlight" data-i18n-dynamic data-zh="国赛二等奖 ×{{ content.achievements.competitions.silver|length }}" data-en="National Second Prize ×{{ content.achievements.competitions.silver|length }}">国赛二等奖 ×{{ content.achievements.competitions.silver|length }}</span></p>
       {% for item in content.achievements.competitions.silver %}
       <p>{{ item.zh }}</p>
       {% endfor %}
@@ -33,7 +33,7 @@
     <div class="detail">
       <p><span class="highlight">{{ content.achievements.patent.count }}</span></p>
       <p style="font-weight:500;">{{ content.achievements.patent.title }}</p>
-      <p><span>专利号：</span>{{ content.achievements.patent.number }}</p>
+      <p><span data-i18n="achieve.patent.number">专利号：</span>{{ content.achievements.patent.number }}</p>
       <p class="detail-muted-sm">{{ content.achievements.patent.inventors }}</p>
     </div>
   </div>
@@ -43,9 +43,9 @@
     <div class="achieve-icon" aria-hidden="true">💻</div>
     <h3 data-i18n="achieve.software">软件著作权</h3>
     <div class="detail">
-      <p><span class="highlight">已登记 {{ content.achievements.software|length }}项</span></p>
+      <p><span class="highlight" data-i18n-dynamic data-zh="已登记 {{ content.achievements.software|length }}项" data-en="Registered: {{ content.achievements.software|length }}">已登记 {{ content.achievements.software|length }}项</span></p>
       {% for soft in content.achievements.software %}
-      <p><span>{{ soft.zh }}</span><br><span class="detail-muted">登记号：{{ soft.number }}</span></p>
+      <p><span>{{ soft.zh }}</span><br><span class="detail-muted"><span data-i18n="achieve.soft.reg_label">登记号：</span>{{ soft.number }}</span></p>
       {% endfor %}
     </div>
   </div>
@@ -55,7 +55,7 @@
     <div class="achieve-icon" aria-hidden="true">🎤</div>
     <h3 data-i18n="achieve.conference">学术会议</h3>
     <div class="detail">
-      <p><span class="highlight">口头汇报 1次</span></p>
+      <p><span class="highlight" data-i18n-dynamic data-zh="口头汇报 1次" data-en="Oral Presentations: 1">口头汇报 1次</span></p>
       <p>{{ content.achievements.conference.description }}</p>
       <p style="font-size:0.82rem;">{{ content.achievements.conference.report }}</p>
       <p class="detail-muted-sm" style="margin-top:8px;">{{ content.achievements.conference.extra }}</p>

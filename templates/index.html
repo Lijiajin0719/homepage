@@ -16,7 +16,7 @@
       {% for stat in content.home.stats %}
       <div class="stat-item">
         <div class="stat-number">{{ stat.value }}</div>
-        <div class="stat-label">{{ stat.label }}</div>
+        <div class="stat-label" data-i18n-dynamic data-zh="{{ stat.label }}" data-en="{{ stat.label_en }}">{{ stat.label }}</div>
       </div>
       {% endfor %}
     </div>

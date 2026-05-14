@@ -22,8 +22,7 @@
 {% for section, items in research_by_section %}
 {% set first_item = items|first %}
 <section id="project-{{ section }}">
-  <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-dark);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--accent);">{{ first_item.section_heading }}</h3>
-
+  <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-dark);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--accent);" data-i18n-dynamic data-zh="{{ first_item.section_heading }}" data-en="{{ first_item.section_heading_en }}">{{ first_item.section_heading }}</h3>
   {% for item in items %}
   <div class="research-project">
     {% if item.image %}

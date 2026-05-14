@@ -457,6 +457,7 @@ function editResearch(index) {
   var r = content.research[index];
   var html = '';
   html += '<div class="form-group"><label class="form-label">标题</label><input class="form-input" id="f_res_title" value="' + escAttr(r.title) + '"></div>';
+  html += '<div class="form-group"><label class="form-label">标题 (英文)</label><input class="form-input" id="f_res_title_en" value="' + escAttr(r.title_en || '') + '"></div>';
   html += '<div class="form-group"><label class="form-label">所属领域</label><select class="form-select" id="f_res_section">'
     + '<option value="sperm"' + (r.section === 'sperm' ? ' selected' : '') + '>精子分析 (sperm)</option>'
     + '<option value="fpm"' + (r.section === 'fpm' ? ' selected' : '') + '>傅里叶叠层显微 (fpm)</option>'
@@ -464,6 +465,7 @@ function editResearch(index) {
     + '<option value="photoacoustic"' + (r.section === 'photoacoustic' ? ' selected' : '') + '>光声成像 (photoacoustic)</option>'
     + '</select></div>';
   html += '<div class="form-group"><label class="form-label">领域标题</label><input class="form-input" id="f_res_heading" value="' + escAttr(r.section_heading) + '"></div>';
+  html += '<div class="form-group"><label class="form-label">领域标题 (英文)</label><input class="form-input" id="f_res_heading_en" value="' + escAttr(r.section_heading_en || '') + '"></div>';
   html += '<div class="form-group"><label class="form-label">图片 (assets/images/)</label><select class="form-input" id="f_res_image" onchange="previewResearchImage()"><option value="">无图片</option></select><img id="researchImagePreview" src="" style="max-width:100%;max-height:200px;margin-top:8px;display:none;border-radius:6px;border:1px solid #e2e8f0;"></div>';
 
   // Paragraphs
@@ -587,10 +589,12 @@ function newItem() {
     document.getElementById('btnDelete').style.display = 'none';
     var html = '';
     html += '<div class="form-group"><label class="form-label">标题</label><input class="form-input" id="f_res_title"></div>';
+    html += '<div class="form-group"><label class="form-label">标题 (英文)</label><input class="form-input" id="f_res_title_en"></div>';
     html += '<div class="form-group"><label class="form-label">所属领域</label><select class="form-select" id="f_res_section">'
       + '<option value="sperm">精子分析 (sperm)</option><option value="fpm">傅里叶叠层显微 (fpm)</option>'
       + '<option value="ultrasound">超声重建 (ultrasound)</option><option value="photoacoustic">光声成像 (photoacoustic)</option></select></div>';
     html += '<div class="form-group"><label class="form-label">领域标题</label><input class="form-input" id="f_res_heading"></div>';
+    html += '<div class="form-group"><label class="form-label">领域标题 (英文)</label><input class="form-input" id="f_res_heading_en"></div>';
     html += '<div class="form-group"><label class="form-label">图片 (assets/images/)</label><select class="form-input" id="f_res_image" onchange="previewResearchImage()"><option value="">无图片</option></select><img id="researchImagePreview" src="" style="max-width:100%;max-height:200px;margin-top:8px;display:none;border-radius:6px;border:1px solid #e2e8f0;"></div>';
     html += '<div class="form-group"><label class="form-label">段落</label><div id="resParagraphs"></div><button class="dyn-add" onclick="addParagraph()">＋ 添加段落</button></div>';
     html += '<div class="form-group"><label class="form-label">Badges</label><div id="resBadges"></div><button class="dyn-add" onclick="addBadge(\'res\')">＋ 添加 Badge</button></div>';
@@ -634,7 +638,10 @@ function collectBadges(prefix) {
     var enInput = row.querySelector('input[id^="' + prefix + '_badge_en_"]');
     var clsSelect = row.querySelector('select[id^="' + prefix + '_badge_class_"]');
     if (zhInput || enInput) {
-      badges.push({ class: clsSelect ? clsSelect.value : 'badge-blue', zh: zhInput ? zhInput.value : '', en: enInput ? enInput.value : '' });
+      var zhVal = zhInput ? zhInput.value : '';
+      var enVal = enInput ? enInput.value : '';
+      if (!enVal.trim()) enVal = zhVal;
+      badges.push({ class: clsSelect ? clsSelect.value : 'badge-blue', zh: zhVal, en: enVal });
     }
   });
   return badges;
@@ -668,7 +675,10 @@ function collectParagraphs() {
   items.forEach(function(item) {
     var inputs = item.querySelectorAll('input[id^="para_label_"], textarea[id^="para_zh_"], textarea[id^="para_en_"]');
     if (inputs.length >= 3) {
-      paragraphs.push({ label: inputs[0].value, zh: inputs[1].value, en: inputs[2].value });
+      var zhVal = inputs[1].value;
+      var enVal = inputs[2].value;
+      if (!enVal.trim()) enVal = zhVal;
+      paragraphs.push({ label: inputs[0].value, zh: zhVal, en: enVal });
     }
   });
   return paragraphs;
@@ -707,7 +717,13 @@ function collectEducation() {
     var vals = [];
     inputs.forEach(function(inp) { vals.push(inp.value); });
     if (vals.length >= 6) {
-      edu.push({ date: vals[0], title: vals[1], desc: vals[2], title_en: vals[3], desc_en: vals[4], date_en: vals[5] });
+      var title_en = vals[3] || '';
+      if (!title_en.trim()) title_en = vals[1];
+      var desc_en = vals[4] || '';
+      if (!desc_en.trim()) desc_en = vals[2];
+      var date_en = vals[5] || '';
+      if (!date_en.trim()) date_en = vals[0];
+      edu.push({ date: vals[0], title: vals[1], desc: vals[2], title_en: title_en, desc_en: desc_en, date_en: date_en });
     }
   });
   return edu;
@@ -795,7 +811,12 @@ function collectGold() {
   var list = [];
   items.forEach(function(item) {
     var tas = item.querySelectorAll('textarea');
-    if (tas.length >= 2) list.push({ zh: tas[0].value, en: tas[1].value });
+    if (tas.length >= 2) {
+      var zh = tas[0].value;
+      var en = tas[1].value;
+      if (!en.trim()) en = zh;
+      list.push({ zh: zh, en: en });
+    }
   });
   return list;
 }
@@ -822,7 +843,12 @@ function collectSilver() {
   var list = [];
   items.forEach(function(item) {
     var tas = item.querySelectorAll('textarea');
-    if (tas.length >= 2) list.push({ zh: tas[0].value, en: tas[1].value });
+    if (tas.length >= 2) {
+      var zh = tas[0].value;
+      var en = tas[1].value;
+      if (!en.trim()) en = zh;
+      list.push({ zh: zh, en: en });
+    }
   });
   return list;
 }
@@ -850,7 +876,12 @@ function collectSoft() {
   var list = [];
   items.forEach(function(item) {
     var inputs = item.querySelectorAll('input');
-    if (inputs.length >= 3) list.push({ zh: inputs[0].value, en: inputs[1].value, number: inputs[2].value });
+    if (inputs.length >= 3) {
+      var zh = inputs[0].value;
+      var en = inputs[1].value;
+      if (!en.trim()) en = zh;
+      list.push({ zh: zh, en: en, number: inputs[2].value });
+    }
   });
   return list;
 }
@@ -908,28 +939,47 @@ function collectHomeData() {
   var h = content.home || {};
   var name = document.getElementById('f_home_name').value.trim();
   if (!name) { throw new Error('姓名不能为空'); }
+  var name_en = document.getElementById('f_home_name_en').value;
+  if (!name_en.trim()) name_en = name;
+  var title = document.getElementById('f_home_title').value;
+  var title_en = document.getElementById('f_home_title_en').value;
+  if (!title_en.trim()) title_en = title;
+  var intro = document.getElementById('f_home_intro').value;
+  var intro_en = document.getElementById('f_home_intro_en').value;
+  if (!intro_en.trim()) intro_en = intro;
+  var tagsStr = document.getElementById('f_home_tags').value || '';
+  var tagsEnStr = document.getElementById('f_home_tags_en').value || '';
+  var tags = tagsStr.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+  var tags_en = tagsEnStr.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+  if (!tags_en.length) tags_en = tags;
+  var hometown = document.getElementById('f_home_hometown').value;
+  var age = document.getElementById('f_home_age').value;
+  var hometown_en = document.getElementById('f_home_hometown_en').value;
+  if (!hometown_en.trim()) hometown_en = hometown;
+  var age_en = document.getElementById('f_home_age_en').value;
+  if (!age_en.trim()) age_en = age;
   return {
     name: name,
-    name_en: document.getElementById('f_home_name_en').value,
-    title: document.getElementById('f_home_title').value,
-    title_en: document.getElementById('f_home_title_en').value,
-    intro: document.getElementById('f_home_intro').value,
-    intro_en: document.getElementById('f_home_intro_en').value,
+    name_en: name_en,
+    title: title,
+    title_en: title_en,
+    intro: intro,
+    intro_en: intro_en,
     avatar: document.getElementById('f_home_avatar').value,
     education: collectEducation(),
-    tags: (document.getElementById('f_home_tags').value || '').split(',').map(function(s) { return s.trim(); }).filter(Boolean),
-    tags_en: (document.getElementById('f_home_tags_en').value || '').split(',').map(function(s) { return s.trim(); }).filter(Boolean),
+    tags: tags,
+    tags_en: tags_en,
     contact: {
       email: document.getElementById('f_home_email').value,
       phone: document.getElementById('f_home_phone').value
     },
     basic: {
-      hometown: document.getElementById('f_home_hometown').value,
-      age: document.getElementById('f_home_age').value
+      hometown: hometown,
+      age: age
     },
     basic_en: {
-      hometown_en: document.getElementById('f_home_hometown_en').value,
-      age_en: document.getElementById('f_home_age_en').value
+      hometown_en: hometown_en,
+      age_en: age_en
     },
     news: collectNews(),
     news_en: collectNewsEn(),
@@ -962,10 +1012,17 @@ function collectPublicationData() {
 function collectResearchData() {
   var title = document.getElementById('f_res_title').value.trim();
   if (!title) throw new Error('标题不能为空');
+  var title_en = document.getElementById('f_res_title_en').value;
+  if (!title_en.trim()) title_en = title;
+  var heading = document.getElementById('f_res_heading').value;
+  var heading_en = document.getElementById('f_res_heading_en').value;
+  if (!heading_en.trim()) heading_en = heading;
   return {
     title: title,
+    title_en: title_en,
     section: document.getElementById('f_res_section').value,
-    section_heading: document.getElementById('f_res_heading').value,
+    section_heading: heading,
+    section_heading_en: heading_en,
     image: document.getElementById('f_res_image').value || null,
     paragraphs: collectParagraphs(),
     badges: collectBadges('res')
@@ -973,13 +1030,16 @@ function collectResearchData() {
 }
 
 function collectAchievementData() {
+  var othersZh = document.getElementById('f_ach_others_zh').value;
+  var othersEn = document.getElementById('f_ach_others_en').value;
+  if (!othersEn.trim()) othersEn = othersZh;
   return {
     competitions: {
       gold: collectGold(),
       silver: collectSilver(),
       others: {
-        zh: document.getElementById('f_ach_others_zh').value,
-        en: document.getElementById('f_ach_others_en').value
+        zh: othersZh,
+        en: othersEn
       }
     },
     patent: {
