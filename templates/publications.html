@@ -6,8 +6,11 @@
 {% block main_class %} main-content{% endblock %}
 
 {% block content %}
+{% set pub_count = content.publications | selectattr('category', 'equalto', 'published') | list | length %}
+{% set conf_count = content.publications | selectattr('category', 'equalto', 'conference') | list | length %}
+{% set review_count = content.publications | selectattr('category', 'equalto', 'review') | list | length %}
 <h2 class="section-title" data-i18n="pub.title">学术论文</h2>
-<p class="section-subtitle" data-i18n="pub.subtitle">5篇已接收 · 2篇审稿中</p>
+<p class="section-subtitle" id="pub-subtitle" data-i18n="pub.subtitle" data-pub-count="{{ pub_count + conf_count }}" data-review-count="{{ review_count }}">{{ pub_count + conf_count }}篇已接收 · {{ review_count }}篇审稿中</p>
 
 <div class="filter-tags">
   <button class="filter-tag active" data-filter="all" data-i18n="pub.filter.all" aria-pressed="true">全部</button>

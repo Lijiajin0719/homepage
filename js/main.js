@@ -113,4 +113,21 @@ function toggleLang() {
   const currentLang = getLang();
   const newLang = currentLang === 'zh' ? 'en' : 'zh';
   setLang(newLang);
+  updatePubSubtitle();
 }
+
+// Dynamic publication subtitle: count papers by category
+function updatePubSubtitle() {
+  const el = document.getElementById('pub-subtitle');
+  if (!el) return;
+  const pubCount = el.getAttribute('data-pub-count') || '0';
+  const reviewCount = el.getAttribute('data-review-count') || '0';
+  const lang = getLang();
+  if (lang === 'zh') {
+    el.textContent = pubCount + '篇已接收 · ' + reviewCount + '篇审稿中';
+  } else {
+    el.textContent = pubCount + ' Published · ' + reviewCount + ' Under Review';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', updatePubSubtitle);
