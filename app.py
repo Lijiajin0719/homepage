@@ -3,7 +3,7 @@
 import json
 import subprocess
 import os
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 
 app = Flask(__name__)
 CONTENT_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'content.json')
@@ -90,6 +90,22 @@ def bad_request(_e):
 @app.errorhandler(500)
 def server_error(_e):
     return jsonify({'status': 'error', 'message': 'Server error'}), 500
+
+@app.route('/assets/<path:filename>')
+def serve_assets(filename):
+    root = os.path.dirname(os.path.abspath(__file__))
+    return send_from_directory(os.path.join(root, 'assets'), filename)
+
+@app.route('/api/images', methods=['GET'])
+def list_images():
+    import glob
+    img_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'images')
+    files = []
+    for ext in ['*.jpg', '*.jpeg', '*.png', '*.gif', '*.svg', '*.ico', '*.webp']:
+        for f in glob.glob(os.path.join(img_dir, ext)):
+            files.append(os.path.basename(f))
+    files.sort()
+    return jsonify({'status': 'ok', 'images': files})
 
 if __name__ == '__main__':
     print('后台管理服务器启动: http://localhost:5000')

@@ -546,6 +546,26 @@
       "section": "ultrasound",
       "section_heading": "研究内容三：基于深度学习的超声平面波重建",
       "title": "LADA Net：线性注意力域自适应网络"
+    },
+    {
+      "title": "1111",
+      "section": "photoacoustic",
+      "section_heading": "1111",
+      "image": "assets/images/image4.png",
+      "paragraphs": [
+        {
+          "label": "111",
+          "zh": "111",
+          "en": ""
+        }
+      ],
+      "badges": [
+        {
+          "class": "badge-blue",
+          "zh": "1111",
+          "en": ""
+        }
+      ]
     }
   ]
 }
