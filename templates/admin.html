@@ -23,6 +23,10 @@ textarea { resize: vertical; }
 .sidebar-item .icon { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
 .sidebar-item .label { overflow: hidden; text-overflow: ellipsis; }
 .sidebar-sep { height: 1px; background: #334155; margin: 6px 16px; }
+@keyframes blink-green { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+@keyframes blink-red { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+.dot-green { background:#22c55e !important; animation: blink-green 1.2s ease-in-out infinite; }
+.dot-red { background:#ef4444 !important; animation: blink-red 0.8s ease-in-out infinite; }
 .sidebar-publish { margin: 8px 12px 16px; padding: 10px 12px; background: #2563eb; color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: background 0.15s; white-space: nowrap; }
 .sidebar-publish:hover { background: #1d4ed8; }
 /* ===== Main Content Area ===== */
@@ -153,6 +157,11 @@ textarea { resize: vertical; }
       </div>
       <div class="sidebar-sep"></div>
     </nav>
+    <div id="conn-status" style="padding:8px 16px;font-size:11px;display:flex;align-items:center;gap:6px;cursor:default;">
+      <span id="conn-dot" style="width:8px;height:8px;border-radius:50%;display:inline-block;background:#64748b;"></span>
+      <span id="conn-text" style="color:#94a3b8;">检测中...</span>
+      <button id="conn-retry" onclick="checkConnection()" style="display:none;background:#334155;color:#e2e8f0;border:none;padding:3px 8px;border-radius:4px;font-size:10px;cursor:pointer;">重试</button>
+    </div>
     <button class="sidebar-publish" onclick="openPublishModal()">
       <span class="icon-only">🚀</span><span>🚀 发布网站</span>
     </button>
@@ -208,7 +217,38 @@ var editingIndex = -1;
 async function init() {
   await loadContent();
   await loadImageList();
+  checkConnection();
   renderSection('home');
+}
+
+async function checkConnection() {
+  var dot = document.getElementById('conn-dot');
+  var text = document.getElementById('conn-text');
+  var retry = document.getElementById('conn-retry');
+  dot.className = '';
+  dot.style.background = '#64748b';
+  text.textContent = '检测中...';
+  retry.style.display = 'none';
+  try {
+    var r = await fetch('/api/check-connection');
+    var data = await r.json();
+    if (data.connected) {
+      dot.className = 'dot-green';
+      text.textContent = '已连接到 GitHub';
+      text.style.color = '#86efac';
+      retry.style.display = 'none';
+    } else {
+      dot.className = 'dot-red';
+      text.textContent = '无法连接到 GitHub';
+      text.style.color = '#fca5a5';
+      retry.style.display = 'inline-block';
+    }
+  } catch(e) {
+    dot.className = 'dot-red';
+    text.textContent = '无法连接到 GitHub';
+    text.style.color = '#fca5a5';
+    retry.style.display = 'inline-block';
+  }
 }
 
 async function loadContent() {

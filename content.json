@@ -294,6 +294,15 @@
       "link": null,
       "review": true,
       "title": "HOPE-Net: Mamba-Guided Hybrid Omni-Perceptual Enhanced Network for Sperm Detection"
+    },
+    {
+      "title": "111",
+      "authors": "111",
+      "journal": "111",
+      "category": "review",
+      "review": true,
+      "link": "111",
+      "badges": []
     }
   ],
   "research": [
@@ -329,8 +338,8 @@
       ],
       "section": "fpm",
       "section_heading": "基于深度学习的傅里叶叠层显微成像",
-      "title": "WM-FPM：小波变换与线性注意力结合的生成对抗架构",
-      "section_heading_en": "Deep Learning-Based Fourier Ptychographic Microscopy"
+      "section_heading_en": "Deep Learning-Based Fourier Ptychographic Microscopy",
+      "title": "WM-FPM：小波变换与线性注意力结合的生成对抗架构"
     },
     {
       "badges": [
@@ -372,8 +381,8 @@
       ],
       "section": "photoacoustic",
       "section_heading": "基于深度学习的光声成像算法研究",
-      "title": "融合物理先验知识的深度学习光声成像框架",
-      "section_heading_en": "Deep Learning-Based Photoacoustic Imaging Algorithm Research"
+      "section_heading_en": "Deep Learning-Based Photoacoustic Imaging Algorithm Research",
+      "title": "融合物理先验知识的深度学习光声成像框架"
     },
     {
       "badges": [
@@ -427,8 +436,8 @@
       ],
       "section": "sperm",
       "section_heading": "基于深度学习的精子实时分析",
-      "title": "MTCA-Net：多任务级联分析网络",
-      "section_heading_en": "Deep Learning-Based Real-Time Sperm Analysis"
+      "section_heading_en": "Deep Learning-Based Real-Time Sperm Analysis",
+      "title": "MTCA-Net：多任务级联分析网络"
     },
     {
       "badges": [
@@ -458,8 +467,8 @@
       ],
       "section": "sperm",
       "section_heading": "基于深度学习的精子实时分析",
-      "title": "HOPE-Net：Mamba引导的混合全感知增强网络",
-      "section_heading_en": "Deep Learning-Based Real-Time Sperm Analysis"
+      "section_heading_en": "Deep Learning-Based Real-Time Sperm Analysis",
+      "title": "HOPE-Net：Mamba引导的混合全感知增强网络"
     },
     {
       "badges": [
@@ -489,8 +498,8 @@
       ],
       "section": "ultrasound",
       "section_heading": "基于深度学习的超声平面波重建",
-      "title": "U2-Net：基于U²-Net的可学习波束形成器",
-      "section_heading_en": "Deep Learning-Based Ultrasound Plane Wave Reconstruction"
+      "section_heading_en": "Deep Learning-Based Ultrasound Plane Wave Reconstruction",
+      "title": "U2-Net：基于U²-Net的可学习波束形成器"
     },
     {
       "badges": [
@@ -520,8 +529,8 @@
       ],
       "section": "ultrasound",
       "section_heading": "基于深度学习的超声平面波重建",
-      "title": "DP-HAFNet：双路径分层自适应融合网络",
-      "section_heading_en": "Deep Learning-Based Ultrasound Plane Wave Reconstruction"
+      "section_heading_en": "Deep Learning-Based Ultrasound Plane Wave Reconstruction",
+      "title": "DP-HAFNet：双路径分层自适应融合网络"
     },
     {
       "badges": [
@@ -551,8 +560,8 @@
       ],
       "section": "ultrasound",
       "section_heading": "基于深度学习的超声平面波重建",
-      "title": "LADA Net：线性注意力域自适应网络",
-      "section_heading_en": "Deep Learning-Based Ultrasound Plane Wave Reconstruction"
+      "section_heading_en": "Deep Learning-Based Ultrasound Plane Wave Reconstruction",
+      "title": "LADA Net：线性注意力域自适应网络"
     }
   ]
 }

@@ -87,6 +87,15 @@ def git_status():
 def bad_request(_e):
     return jsonify({'status': 'error', 'message': 'Bad request'}), 400
 
+@app.route('/api/check-connection', methods=['GET'])
+def check_connection():
+    import socket
+    try:
+        socket.create_connection(('github.com', 443), timeout=5)
+        return jsonify({'status': 'ok', 'connected': True})
+    except Exception:
+        return jsonify({'status': 'ok', 'connected': False})
+
 @app.errorhandler(500)
 def server_error(_e):
     return jsonify({'status': 'error', 'message': 'Server error'}), 500
