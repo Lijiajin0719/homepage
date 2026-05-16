@@ -242,22 +242,29 @@
       "title": "High-Quality Plane-Wave Image Reconstruction using the U2-Net Deep Learning Model"
     },
     {
+      "title": "LADA Net: A Linear Attention Domain Adaptation Network for Ultrasound Image Reconstruction from Single Plane Wave RF Data",
       "authors": "J. Li, W. Sun, et al.",
+      "journal": "2025 IEEE International Ultrasonics Symposium (IUS), 2025",
+      "category": "conference",
+      "review": false,
+      "link": "https://ieeexplore.ieee.org/document/11201630",
       "badges": [
         {
           "class": "badge-gray",
-          "zh": "IEEE IUS 2025"
+          "zh": "IEEE IUS 2025",
+          "en": "IEEE IUS 2025"
         },
         {
           "class": "badge-green",
-          "zh": "Student Travel Grant"
+          "zh": "Student Travel Grant",
+          "en": "Student Travel Grant"
+        },
+        {
+          "class": "badge-blue",
+          "zh": "口头汇报",
+          "en": "口头汇报"
         }
-      ],
-      "category": "conference",
-      "journal": "2025 IEEE International Ultrasonics Symposium (IUS), 2025",
-      "link": "https://ieeexplore.ieee.org/document/11201630",
-      "review": false,
-      "title": "LADA Net: A Linear Attention Domain Adaptation Network for Ultrasound Image Reconstruction from Single Plane Wave RF Data"
+      ]
     },
     {
       "authors": "Y. Xie, J. Li, et al.",
