@@ -242,29 +242,29 @@
       "title": "High-Quality Plane-Wave Image Reconstruction using the U2-Net Deep Learning Model"
     },
     {
-      "title": "LADA Net: A Linear Attention Domain Adaptation Network for Ultrasound Image Reconstruction from Single Plane Wave RF Data",
       "authors": "J. Li, W. Sun, et al.",
-      "journal": "2025 IEEE International Ultrasonics Symposium (IUS), 2025",
-      "category": "conference",
-      "review": false,
-      "link": "https://ieeexplore.ieee.org/document/11201630",
       "badges": [
         {
           "class": "badge-gray",
-          "zh": "IEEE IUS 2025",
-          "en": "IEEE IUS 2025"
+          "en": "IEEE IUS 2025",
+          "zh": "IEEE IUS 2025"
         },
         {
           "class": "badge-green",
-          "zh": "Student Travel Grant",
-          "en": "Student Travel Grant"
+          "en": "Student Travel Grant",
+          "zh": "Student Travel Grant"
         },
         {
           "class": "badge-blue",
-          "zh": "口头汇报",
-          "en": "Oral"
+          "en": "Oral",
+          "zh": "口头汇报"
         }
-      ]
+      ],
+      "category": "conference",
+      "journal": "2025 IEEE International Ultrasonics Symposium (IUS), 2025",
+      "link": "https://ieeexplore.ieee.org/document/11201630",
+      "review": false,
+      "title": "LADA Net: A Linear Attention Domain Adaptation Network for Ultrasound Image Reconstruction from Single Plane Wave RF Data"
     },
     {
       "authors": "Y. Xie, J. Li, et al.",
@@ -438,35 +438,41 @@
       "title": "MTCA-Net：多任务级联分析网络"
     },
     {
-      "badges": [
-        {
-          "class": "badge-yellow",
-          "zh": "IEEE JBHI · Major Revision"
-        },
-        {
-          "class": "badge-yellow",
-          "zh": "中科院一区 · IF 6.8"
-        },
-        {
-          "class": "badge-blue",
-          "zh": "Mamba · 状态空间模型"
-        }
-      ],
-      "image": "assets/images/image20.jpg",
-      "paragraphs": [
-        {
-          "label": "背景：",
-          "zh": "临床场景中杂质较多且形态与精子相似，传统CNN感受野局限于局部区域，Transformer虽能建模全局依赖但计算复杂度高，难以在实时性要求下部署。"
-        },
-        {
-          "label": "方法：",
-          "zh": "设计了Mamba引导的ShuffleNet（MGS-Net）为主干网络，混合状态空间路径聚合网络（HSS-PAN）为颈部网络。HOPE-Net能够同时兼顾局部细节特征与全局上下文信息，通过选择性扫描机制自适应地聚焦于关键区域，在复杂临床场景中实现鲁棒的精子检测。"
-        }
-      ],
+      "title": "HOPE-Net：Mamba引导的混合全感知增强网络",
+      "title_en": "HOPE-Net：Mamba引导的混合全感知增强网络",
       "section": "sperm",
       "section_heading": "基于深度学习的精子实时分析",
       "section_heading_en": "Deep Learning-Based Real-Time Sperm Analysis",
-      "title": "HOPE-Net：Mamba引导的混合全感知增强网络"
+      "image": "assets/images/GA.jpg",
+      "paragraphs": [
+        {
+          "label": "背景：",
+          "zh": "临床场景中杂质较多且形态与精子相似，传统CNN感受野局限于局部区域，Transformer虽能建模全局依赖但计算复杂度高，难以在实时性要求下部署。",
+          "en": "临床场景中杂质较多且形态与精子相似，传统CNN感受野局限于局部区域，Transformer虽能建模全局依赖但计算复杂度高，难以在实时性要求下部署。"
+        },
+        {
+          "label": "方法：",
+          "zh": "设计了Mamba引导的ShuffleNet（MGS-Net）为主干网络，混合状态空间路径聚合网络（HSS-PAN）为颈部网络。HOPE-Net能够同时兼顾局部细节特征与全局上下文信息，通过选择性扫描机制自适应地聚焦于关键区域，在复杂临床场景中实现鲁棒的精子检测。",
+          "en": "设计了Mamba引导的ShuffleNet（MGS-Net）为主干网络，混合状态空间路径聚合网络（HSS-PAN）为颈部网络。HOPE-Net能够同时兼顾局部细节特征与全局上下文信息，通过选择性扫描机制自适应地聚焦于关键区域，在复杂临床场景中实现鲁棒的精子检测。"
+        }
+      ],
+      "badges": [
+        {
+          "class": "badge-yellow",
+          "zh": "IEEE JBHI · Major Revision",
+          "en": "IEEE JBHI · Major Revision"
+        },
+        {
+          "class": "badge-yellow",
+          "zh": "中科院一区 · IF 6.8",
+          "en": "中科院一区 · IF 6.8"
+        },
+        {
+          "class": "badge-blue",
+          "zh": "Mamba · 状态空间模型",
+          "en": "Mamba · 状态空间模型"
+        }
+      ]
     },
     {
       "badges": [
