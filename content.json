@@ -53,47 +53,57 @@
     ]
   },
   "home": {
-    "avatar": "assets/images/image3.jpg",
-    "basic": {
-      "age": "年龄：26岁 · 硕士在读",
-      "hometown": "籍贯：山东省烟台市 · 汉族"
-    },
-    "basic_en": {
-      "age_en": "Age: 26 · M.S. Candidate",
-      "hometown_en": "Hometown: Yantai, Shandong · Han Chinese"
-    },
+    "name": "李佳津",
+    "name_en": "Jiajin Li",
+    "title": "医学人工智能 · 硕士研究生",
+    "title_en": "Medical AI · M.S. Candidate",
+    "intro": "研究方向为深度学习在光学和医学图像方面的应用。以第一或共一作者在Laser & Photonics Reviews（JCRQ1，IF: 10）、Measurement（JCRQ1，IF: 5.6）、Advanced Intelligent Systems（JCRQ1，IF: 6.1）发表期刊论文3篇，参与发表论文2篇；在IEEE IUS等超声领域顶级会议发表会议论文3篇，并获得组委会学生旅行补助；完成国内外学术会议口头报告5次、壁报交流2次；参与省部级科研基金3项；在全国大学生生物医学工程创新设计竞赛中获国赛一等奖2项、二等奖1项，作品聚焦面向ICSI的精子实时智能分析系统，完成从算法研究到系统集成的转化，并已获批1项国家发明专利与5项软件著作权。",
+    "intro_en": "Research focuses on deep learning applications in optical and medical image processing. First/co-first author of 3 journal papers in Laser & Photonics Reviews (JCR Q1, IF: 10), Measurement (JCR Q1, IF: 5.6), and Advanced Intelligent Systems (JCR Q1, IF: 6.1); co-author of 2 additional papers. Published 3 conference papers at top ultrasound conferences including IEEE IUS, awarded Student Travel Grant. Delivered 5 oral presentations and 2 poster sessions at international and domestic conferences. Participated in 3 provincial/ministerial research fund projects. Won 2 national first prizes and 1 national second prize in the National Biomedical Engineering Innovation Design Competition, with projects focusing on ICSI-oriented real-time sperm intelligent analysis systems, completing the transformation from algorithm research to system integration. Granted 1 national invention patent and 5 software copyrights.",
+    "avatar": "assets/images/52808827.jpg",
+    "education": [
+      {
+        "date": "2023.09 — 至今",
+        "title": "安徽医科大学 · 生物医学工程（硕士）",
+        "desc": "生物医学工程学院 · 电子信息方向（医学人工智能）",
+        "title_en": "Anhui Medical University · Biomedical Engineering (M.S.)",
+        "desc_en": "School of Biomedical Engineering · Medical AI",
+        "date_en": "2023.09 — Present"
+      },
+      {
+        "date": "2017.09 — 2021.06",
+        "title": "曲阜师范大学 · 计算机科学与技术（本科）",
+        "desc": "计算机学院",
+        "title_en": "Qufu Normal University · Computer Science and Technology (B.S.)",
+        "desc_en": "School of Computer Science",
+        "date_en": "2017.09 — 2021.06"
+      }
+    ],
+    "tags": [
+      "图像分割",
+      "目标检测",
+      "多目标追踪",
+      "超分辨重构",
+      "超声平面波重建"
+    ],
+    "tags_en": [
+      "Image Segmentation",
+      "Object Detection",
+      "Multi-Object Tracking",
+      "Super-Resolution",
+      "Ultrasound Plane Wave Imaging"
+    ],
     "contact": {
       "email": "15563866837@163.com",
       "phone": "17852650377"
     },
-    "education": [
-      {
-        "date": "2023.09 — 至今",
-        "date_en": "2023.09 — Present",
-        "desc": "生物医学工程学院 · 电子信息方向（医学人工智能）",
-        "desc_en": "School of Biomedical Engineering · Medical AI",
-        "title": "安徽医科大学 · 生物医学工程（硕士）",
-        "title_en": "Anhui Medical University · Biomedical Engineering (M.S.)"
-      },
-      {
-        "date": "2017.09 — 2021.06",
-        "date_en": "2017.09 — 2021.06",
-        "desc": "计算机学院",
-        "desc_en": "School of Computer Science",
-        "title": "曲阜师范大学 · 计算机科学与技术（本科）",
-        "title_en": "Qufu Normal University · Computer Science and Technology (B.S.)"
-      }
-    ],
-    "intro": "研究方向为深度学习在光学和医学图像方面的应用。以第一或共一作者在Laser & Photonics Reviews（JCRQ1，IF: 10）、Measurement（JCRQ1，IF: 5.6）、Advanced Intelligent Systems（JCRQ1，IF: 6.1）发表期刊论文3篇，参与发表论文2篇；在IEEE IUS等超声领域顶级会议发表会议论文3篇，并获得组委会学生旅行补助；完成国内外学术会议口头报告5次、壁报交流2次；参与省部级科研基金3项；在全国大学生生物医学工程创新设计竞赛中获国赛一等奖2项、二等奖1项，作品聚焦面向ICSI的精子实时智能分析系统，完成从算法研究到系统集成的转化，并已获批1项国家发明专利与5项软件著作权。",
-    "intro_en": "Research focuses on deep learning applications in optical and medical image processing. First/co-first author of 3 journal papers in Laser & Photonics Reviews (JCR Q1, IF: 10), Measurement (JCR Q1, IF: 5.6), and Advanced Intelligent Systems (JCR Q1, IF: 6.1); co-author of 2 additional papers. Published 3 conference papers at top ultrasound conferences including IEEE IUS, awarded Student Travel Grant. Delivered 5 oral presentations and 2 poster sessions at international and domestic conferences. Participated in 3 provincial/ministerial research fund projects. Won 2 national first prizes and 1 national second prize in the National Biomedical Engineering Innovation Design Competition, with projects focusing on ICSI-oriented real-time sperm intelligent analysis systems, completing the transformation from algorithm research to system integration. Granted 1 national invention patent and 5 software copyrights.",
-    "links": {
-      "github": "https://github.com/Lijiajin0719",
-      "orcid": "https://orcid.org/0009-0006-9159-4503",
-      "scopus": "https://www.scopus.com/authid/detail.uri?authorId=58158860100",
-      "wos": "https://webofscience.clarivate.cn/wos/author/record/JPW-9300-2023"
+    "basic": {
+      "hometown": "籍贯：山东省烟台市 · 汉族",
+      "age": "年龄：26岁 · 硕士在读"
     },
-    "name": "李佳津",
-    "name_en": "Jiajin Li",
+    "basic_en": {
+      "hometown_en": "Hometown: Yantai, Shandong · Han Chinese",
+      "age_en": "Age: 26 · M.S. Candidate"
+    },
     "news": [
       {
         "zh": "DP-HAFNet论文已被Measurement (中科院二区Top, IF=5.6) 接收"
@@ -114,6 +124,12 @@
       "HOPE-Net submitted to IEEE JBHI (CAS Q1, IF=6.8), under review",
       "Won First Prize at the 10th National Biomedical Engineering Innovation Design Competition"
     ],
+    "links": {
+      "github": "https://github.com/Lijiajin0719",
+      "orcid": "https://orcid.org/0009-0006-9159-4503",
+      "wos": "https://webofscience.clarivate.cn/wos/author/record/JPW-9300-2023",
+      "scopus": "https://www.scopus.com/authid/detail.uri?authorId=58158860100"
+    },
     "stats": [
       {
         "label": "学术论文",
@@ -135,23 +151,7 @@
         "label_en": "National Awards",
         "value": "5"
       }
-    ],
-    "tags": [
-      "图像分割",
-      "目标检测",
-      "多目标追踪",
-      "超分辨重构",
-      "超声平面波重建"
-    ],
-    "tags_en": [
-      "Image Segmentation",
-      "Object Detection",
-      "Multi-Object Tracking",
-      "Super-Resolution",
-      "Ultrasound Plane Wave Imaging"
-    ],
-    "title": "医学人工智能 · 硕士研究生",
-    "title_en": "Medical AI · M.S. Candidate"
+    ]
   },
   "publications": [
     {
@@ -438,41 +438,41 @@
       "title": "MTCA-Net：多任务级联分析网络"
     },
     {
-      "title": "HOPE-Net：Mamba引导的混合全感知增强网络",
-      "title_en": "HOPE-Net：Mamba引导的混合全感知增强网络",
-      "section": "sperm",
-      "section_heading": "基于深度学习的精子实时分析",
-      "section_heading_en": "Deep Learning-Based Real-Time Sperm Analysis",
-      "image": "assets/images/GA.jpg",
-      "paragraphs": [
-        {
-          "label": "背景：",
-          "zh": "临床场景中杂质较多且形态与精子相似，传统CNN感受野局限于局部区域，Transformer虽能建模全局依赖但计算复杂度高，难以在实时性要求下部署。",
-          "en": "临床场景中杂质较多且形态与精子相似，传统CNN感受野局限于局部区域，Transformer虽能建模全局依赖但计算复杂度高，难以在实时性要求下部署。"
-        },
-        {
-          "label": "方法：",
-          "zh": "设计了Mamba引导的ShuffleNet（MGS-Net）为主干网络，混合状态空间路径聚合网络（HSS-PAN）为颈部网络。HOPE-Net能够同时兼顾局部细节特征与全局上下文信息，通过选择性扫描机制自适应地聚焦于关键区域，在复杂临床场景中实现鲁棒的精子检测。",
-          "en": "设计了Mamba引导的ShuffleNet（MGS-Net）为主干网络，混合状态空间路径聚合网络（HSS-PAN）为颈部网络。HOPE-Net能够同时兼顾局部细节特征与全局上下文信息，通过选择性扫描机制自适应地聚焦于关键区域，在复杂临床场景中实现鲁棒的精子检测。"
-        }
-      ],
       "badges": [
         {
           "class": "badge-yellow",
-          "zh": "IEEE JBHI · Major Revision",
-          "en": "IEEE JBHI · Major Revision"
+          "en": "IEEE JBHI · Major Revision",
+          "zh": "IEEE JBHI · Major Revision"
         },
         {
           "class": "badge-yellow",
-          "zh": "中科院一区 · IF 6.8",
-          "en": "中科院一区 · IF 6.8"
+          "en": "中科院一区 · IF 6.8",
+          "zh": "中科院一区 · IF 6.8"
         },
         {
           "class": "badge-blue",
-          "zh": "Mamba · 状态空间模型",
-          "en": "Mamba · 状态空间模型"
+          "en": "Mamba · 状态空间模型",
+          "zh": "Mamba · 状态空间模型"
         }
-      ]
+      ],
+      "image": "assets/images/GA.jpg",
+      "paragraphs": [
+        {
+          "en": "临床场景中杂质较多且形态与精子相似，传统CNN感受野局限于局部区域，Transformer虽能建模全局依赖但计算复杂度高，难以在实时性要求下部署。",
+          "label": "背景：",
+          "zh": "临床场景中杂质较多且形态与精子相似，传统CNN感受野局限于局部区域，Transformer虽能建模全局依赖但计算复杂度高，难以在实时性要求下部署。"
+        },
+        {
+          "en": "设计了Mamba引导的ShuffleNet（MGS-Net）为主干网络，混合状态空间路径聚合网络（HSS-PAN）为颈部网络。HOPE-Net能够同时兼顾局部细节特征与全局上下文信息，通过选择性扫描机制自适应地聚焦于关键区域，在复杂临床场景中实现鲁棒的精子检测。",
+          "label": "方法：",
+          "zh": "设计了Mamba引导的ShuffleNet（MGS-Net）为主干网络，混合状态空间路径聚合网络（HSS-PAN）为颈部网络。HOPE-Net能够同时兼顾局部细节特征与全局上下文信息，通过选择性扫描机制自适应地聚焦于关键区域，在复杂临床场景中实现鲁棒的精子检测。"
+        }
+      ],
+      "section": "sperm",
+      "section_heading": "基于深度学习的精子实时分析",
+      "section_heading_en": "Deep Learning-Based Real-Time Sperm Analysis",
+      "title": "HOPE-Net：Mamba引导的混合全感知增强网络",
+      "title_en": "HOPE-Net：Mamba引导的混合全感知增强网络"
     },
     {
       "badges": [
